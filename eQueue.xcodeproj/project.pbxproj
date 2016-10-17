@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D81669251DB4D553000D7C43 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81669241DB4D553000D7C43 /* DataSource.swift */; };
 		D84E776B1DAA7AF200DB9DE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E776A1DAA7AF200DB9DE0 /* AppDelegate.swift */; };
 		D84E776D1DAA7AF200DB9DE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E776C1DAA7AF200DB9DE0 /* ViewController.swift */; };
 		D84E77701DAA7AF200DB9DE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84E776E1DAA7AF200DB9DE0 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D81669241DB4D553000D7C43 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		D84E77671DAA7AF200DB9DE0 /* eQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84E776A1DAA7AF200DB9DE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D84E776C1DAA7AF200DB9DE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				D84E77711DAA7AF200DB9DE0 /* Assets.xcassets */,
 				D84E77731DAA7AF200DB9DE0 /* LaunchScreen.storyboard */,
 				D84E77761DAA7AF200DB9DE0 /* Info.plist */,
+				D81669241DB4D553000D7C43 /* DataSource.swift */,
 			);
 			path = eQueue;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D81669251DB4D553000D7C43 /* DataSource.swift in Sources */,
 				D84E776D1DAA7AF200DB9DE0 /* ViewController.swift in Sources */,
 				D84E776B1DAA7AF200DB9DE0 /* AppDelegate.swift in Sources */,
 			);
@@ -505,6 +509,7 @@
 				D84E77911DAA7AF200DB9DE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D84E77921DAA7AF200DB9DE0 /* Build configuration list for PBXNativeTarget "eQueueTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +518,7 @@
 				D84E77941DAA7AF200DB9DE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D84E77951DAA7AF200DB9DE0 /* Build configuration list for PBXNativeTarget "eQueueUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +527,7 @@
 				D84E77971DAA7AF200DB9DE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
