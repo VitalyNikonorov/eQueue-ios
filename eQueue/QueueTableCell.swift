@@ -11,7 +11,7 @@ import UIKit
 class QueueTableCell: UITableViewCell {
     
     @IBOutlet var queueName: UILabel!
-    @IBOutlet var QueueDescription: UILabel!
+    @IBOutlet var queueDescription: UILabel!
     @IBOutlet var forwardMeLabel: UILabel!
     @IBOutlet var sizeLabel: UILabel!
     @IBOutlet var waitingTimeLabel: UILabel!
