@@ -18,9 +18,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView:  UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "QueueCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = array[indexPath.row]
-        cell.imageView?.image = #imageLiteral(resourceName: "queue_icon")
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QueueTableCell
+        
+        cell.queueName.text = array[indexPath.row]
+        
         return cell
     }
 

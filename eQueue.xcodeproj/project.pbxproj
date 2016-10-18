@@ -15,6 +15,7 @@
 		D84E77751DAA7AF200DB9DE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84E77731DAA7AF200DB9DE0 /* LaunchScreen.storyboard */; };
 		D84E77801DAA7AF200DB9DE0 /* eQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E777F1DAA7AF200DB9DE0 /* eQueueTests.swift */; };
 		D84E778B1DAA7AF200DB9DE0 /* eQueueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */; };
+		D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D84E77861DAA7AF200DB9DE0 /* eQueueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eQueueUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eQueueUITests.swift; sourceTree = "<group>"; };
 		D84E778C1DAA7AF200DB9DE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				D84E77731DAA7AF200DB9DE0 /* LaunchScreen.storyboard */,
 				D84E77761DAA7AF200DB9DE0 /* Info.plist */,
 				D81669241DB4D553000D7C43 /* DataSource.swift */,
+				D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */,
 			);
 			path = eQueue;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */,
 				D81669251DB4D553000D7C43 /* DataSource.swift in Sources */,
 				D84E776D1DAA7AF200DB9DE0 /* ViewController.swift in Sources */,
 				D84E776B1DAA7AF200DB9DE0 /* AppDelegate.swift in Sources */,

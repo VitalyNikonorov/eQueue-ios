@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,25 +19,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="djL-N0-ehD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="djL-N0-ehD">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QueueCell" textLabel="sqv-El-aMw" style="IBUITableViewCellStyleDefault" id="RUG-dW-5P4">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QueueCell" id="RUG-dW-5P4" customClass="QueueTableCell" customModule="eQueue" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RUG-dW-5P4" id="XdG-7O-tXW">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="179"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sqv-El-aMw">
-                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="vtb-fW-UiC">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="3Jt-j9-ZZq"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Queue name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaG-v8-asI">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJC-At-CYz">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place" translatesAutoresizingMaskIntoConstraints="NO" id="x7y-x4-CYU">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="14" id="1TQ-R6-oKG"/>
+                                                        <constraint firstAttribute="height" constant="20" id="qQv-cM-VyF"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="access-time" translatesAutoresizingMaskIntoConstraints="NO" id="Ont-WJ-ZKI"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue" translatesAutoresizingMaskIntoConstraints="NO" id="Dvb-Il-LTg">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="LNT-yL-bW3"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group" translatesAutoresizingMaskIntoConstraints="NO" id="Mk9-tx-1vZ">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="722-BF-JU8"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vtb-fW-UiC" secondAttribute="bottom" constant="92" id="24e-ez-b1Y"/>
+                                                <constraint firstItem="Mk9-tx-1vZ" firstAttribute="leading" secondItem="Dvb-Il-LTg" secondAttribute="leading" id="2IF-Ss-0h3"/>
+                                                <constraint firstItem="Mk9-tx-1vZ" firstAttribute="leading" secondItem="x7y-x4-CYU" secondAttribute="leading" id="9on-SJ-jNC"/>
+                                                <constraint firstItem="Dvb-Il-LTg" firstAttribute="top" secondItem="Ont-WJ-ZKI" secondAttribute="bottom" constant="8" id="Chu-sS-XLA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bJC-At-CYz" secondAttribute="trailing" id="EsM-EP-Oug"/>
+                                                <constraint firstItem="x7y-x4-CYU" firstAttribute="leading" secondItem="vtb-fW-UiC" secondAttribute="leading" id="JNz-zK-8ZY"/>
+                                                <constraint firstItem="Ont-WJ-ZKI" firstAttribute="top" secondItem="x7y-x4-CYU" secondAttribute="bottom" constant="8" symbolic="YES" id="LtG-yI-1cA"/>
+                                                <constraint firstItem="Ont-WJ-ZKI" firstAttribute="top" secondItem="x7y-x4-CYU" secondAttribute="bottom" constant="8" id="Ltu-Cd-WEP"/>
+                                                <constraint firstItem="vtb-fW-UiC" firstAttribute="top" secondItem="XdG-7O-tXW" secondAttribute="topMargin" constant="7" id="NBx-Mx-pWp"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mk9-tx-1vZ" secondAttribute="bottom" id="OL9-ao-dkY"/>
+                                                <constraint firstItem="AaG-v8-asI" firstAttribute="top" secondItem="vtb-fW-UiC" secondAttribute="top" id="Q3M-nf-zH0"/>
+                                                <constraint firstItem="x7y-x4-CYU" firstAttribute="top" secondItem="vtb-fW-UiC" secondAttribute="bottom" constant="8" id="Wou-UX-mtV"/>
+                                                <constraint firstItem="Mk9-tx-1vZ" firstAttribute="top" secondItem="Dvb-Il-LTg" secondAttribute="bottom" constant="3" id="Ypa-TH-DU9"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="AaG-v8-asI" secondAttribute="trailing" id="aXG-Hw-muE"/>
+                                                <constraint firstItem="vtb-fW-UiC" firstAttribute="leading" secondItem="XdG-7O-tXW" secondAttribute="leadingMargin" constant="7" id="b1u-M8-Wgj"/>
+                                                <constraint firstItem="Mk9-tx-1vZ" firstAttribute="leading" secondItem="Ont-WJ-ZKI" secondAttribute="leading" id="cNv-om-Ax5"/>
+                                                <constraint firstItem="x7y-x4-CYU" firstAttribute="centerX" secondItem="Ont-WJ-ZKI" secondAttribute="centerX" constant="-2.5" id="eXR-xt-2zw"/>
+                                                <constraint firstItem="Ont-WJ-ZKI" firstAttribute="centerX" secondItem="Dvb-Il-LTg" secondAttribute="centerX" id="gwP-QU-SZs"/>
+                                                <constraint firstItem="bJC-At-CYz" firstAttribute="leading" secondItem="vtb-fW-UiC" secondAttribute="trailing" constant="20" id="jw3-N6-fWW"/>
+                                                <constraint firstItem="AaG-v8-asI" firstAttribute="leading" secondItem="vtb-fW-UiC" secondAttribute="trailing" constant="20" id="nWN-QF-bUH"/>
+                                                <constraint firstItem="Mk9-tx-1vZ" firstAttribute="top" secondItem="Dvb-Il-LTg" secondAttribute="bottom" constant="3" id="oHn-ol-SGl"/>
+                                                <constraint firstItem="bJC-At-CYz" firstAttribute="bottom" secondItem="vtb-fW-UiC" secondAttribute="bottom" id="tXF-vd-ooo"/>
+                                                <constraint firstItem="Mk9-tx-1vZ" firstAttribute="centerX" secondItem="Dvb-Il-LTg" secondAttribute="centerX" id="tzY-LV-h5T"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="QueueDescription" destination="bJC-At-CYz" id="0xS-2C-LTd"/>
+                                            <outlet property="queueName" destination="AaG-v8-asI" id="iIf-Lw-MV8"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -59,4 +114,11 @@
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="access-time" width="20" height="20"/>
+        <image name="group" width="20" height="16"/>
+        <image name="place" width="14" height="20"/>
+        <image name="queue" width="20" height="18"/>
+        <image name="queue_icon" width="64" height="60"/>
+    </resources>
 </document>
