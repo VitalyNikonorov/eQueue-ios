@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var array = ["Queue1", "Queue2"]
+    var array = ["QueueQUUEUEUEUEUEUEUUEUEUE1", "Queue2"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count

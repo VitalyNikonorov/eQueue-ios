@@ -16,6 +16,7 @@
 		D84E77801DAA7AF200DB9DE0 /* eQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E777F1DAA7AF200DB9DE0 /* eQueueTests.swift */; };
 		D84E778B1DAA7AF200DB9DE0 /* eQueueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */; };
 		D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */; };
+		D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8B1DB6A62B006AE367 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eQueueUITests.swift; sourceTree = "<group>"; };
 		D84E778C1DAA7AF200DB9DE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTableCell.swift; sourceTree = "<group>"; };
+		D8D21B8B1DB6A62B006AE367 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				D84E77761DAA7AF200DB9DE0 /* Info.plist */,
 				D81669241DB4D553000D7C43 /* DataSource.swift */,
 				D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */,
+				D8D21B8B1DB6A62B006AE367 /* Queue.swift */,
 			);
 			path = eQueue;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				TargetAttributes = {
 					D84E77661DAA7AF200DB9DE0 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = V3J88R4YSC;
 						ProvisioningStyle = Automatic;
 					};
 					D84E777A1DAA7AF200DB9DE0 = {
@@ -265,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */,
 				D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */,
 				D81669251DB4D553000D7C43 /* DataSource.swift in Sources */,
 				D84E776D1DAA7AF200DB9DE0 /* ViewController.swift in Sources */,
@@ -420,9 +425,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V3J88R4YSC;
 				INFOPLIST_FILE = eQueue/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.equeue.eQueue;
+				PRODUCT_BUNDLE_IDENTIFIER = org.equeue.equeue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -432,9 +438,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V3J88R4YSC;
 				INFOPLIST_FILE = eQueue/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.equeue.eQueue;
+				PRODUCT_BUNDLE_IDENTIFIER = org.equeue.equeue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

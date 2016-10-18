@@ -101,7 +101,11 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="QueueDescription" destination="bJC-At-CYz" id="0xS-2C-LTd"/>
+                                            <outlet property="forwardMeLabel" destination="XGE-RZ-2uX" id="Stg-3T-HOx"/>
+                                            <outlet property="locationLabel" destination="gMe-Qz-zm9" id="ePA-Sj-Udw"/>
                                             <outlet property="queueName" destination="AaG-v8-asI" id="iIf-Lw-MV8"/>
+                                            <outlet property="sizeLabel" destination="Wkw-Cd-z4g" id="DqQ-ay-Ktp"/>
+                                            <outlet property="waitingTimeLabel" destination="RpN-W1-Fsd" id="ADL-8Q-Or1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
