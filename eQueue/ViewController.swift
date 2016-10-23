@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet var tableView: UITableView!
     
     var dataSource: DataSource = DataSource()
     
@@ -40,6 +41,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+       
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showQueueSegue"{
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let destinationVC = segue.destination as? QueueScreenController
+                destinationVC?.queue = dataSource.getMyQueues()[indexPath.row]
+            }
+        }
     }
 
 }

@@ -106,7 +106,7 @@
                                             <outlet property="queueName" destination="AaG-v8-asI" id="iIf-Lw-MV8"/>
                                             <outlet property="sizeLabel" destination="Wkw-Cd-z4g" id="DqQ-ay-Ktp"/>
                                             <outlet property="waitingTimeLabel" destination="RpN-W1-Fsd" id="ADL-8Q-Or1"/>
-                                            <segue destination="lds-K4-1IB" kind="show" id="xfb-28-VBC"/>
+                                            <segue destination="gvN-0m-yWF" kind="show" identifier="showQueueSegue" id="4Bd-5a-RfU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -125,28 +125,43 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qsz-HS-cRh"/>
+                    <connections>
+                        <outlet property="tableView" destination="djL-N0-ehD" id="UGw-BQ-VHm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2017" y="124"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="MDb-e7-gw6">
+        <!--Queue Screen Controller-->
+        <scene sceneID="Q3K-hh-3IW">
             <objects>
-                <viewController id="lds-K4-1IB" sceneMemberID="viewController">
+                <viewController id="gvN-0m-yWF" customClass="QueueScreenController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="e3R-Zs-rAO"/>
-                        <viewControllerLayoutGuide type="bottom" id="4Bv-9U-2Nt"/>
+                        <viewControllerLayoutGuide type="top" id="AEn-7J-PP1"/>
+                        <viewControllerLayoutGuide type="bottom" id="lym-HO-AzS"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="s4s-LS-hNA">
+                    <view key="view" contentMode="scaleToFill" id="H63-Bw-JNL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-ko-zqh">
+                                <frame key="frameInset" minX="120" minY="319" width="207" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="queueSizeLabel" destination="UTy-ko-zqh" id="k5a-L8-nUM"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OXN-cr-blY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="irU-xZ-R4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3590" y="124"/>
+            <point key="canvasLocation" x="3261.5999999999999" y="123.68815592203899"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="sE9-HV-PnX">
@@ -203,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cph-l0-63o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2018" y="1018"/>
+            <point key="canvasLocation" x="2017" y="876"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="UFn-RT-8dE">
@@ -222,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y90-oU-UPA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1996" y="1741"/>
+            <point key="canvasLocation" x="2017" y="1826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B4C-2M-C9r">
@@ -317,7 +332,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2LI-dg-pKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="1018"/>
+            <point key="canvasLocation" x="1057" y="876"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="89g-BQ-eNe">
@@ -336,7 +351,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emQ-7o-8zQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="1741"/>
+            <point key="canvasLocation" x="1121" y="1826"/>
         </scene>
     </scenes>
     <resources>
