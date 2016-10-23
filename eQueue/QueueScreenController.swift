@@ -15,6 +15,8 @@ class QueueScreenController : UIViewController {
     @IBOutlet var queueSizeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         queueSizeLabel.text = String(describing: queue.size)
+        title = queue.name
     }
 }

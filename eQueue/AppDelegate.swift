@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor(red: 55.0 / 255.0, green: 32.0 / 255.0, blue: 87.0 / 255.0, alpha: 1.0)
         UINavigationBar.appearance().barTintColor = UIColor(red: 55.0 / 255.0, green: 32.0 / 255.0, blue: 87.0 / 255.0, alpha: 1.0)
         UITabBar.appearance().backgroundColor = UIColor(red: 55 / 255, green: 32 / 255, blue: 87 / 255, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UIApplication.shared.statusBarStyle = .lightContent
         return true
     }
 
