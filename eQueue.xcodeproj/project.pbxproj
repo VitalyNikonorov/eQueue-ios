@@ -18,6 +18,7 @@
 		D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */; };
 		D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8B1DB6A62B006AE367 /* Queue.swift */; };
 		D8D21B8E1DBD1E1F006AE367 /* QueueScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8D1DBD1E1F006AE367 /* QueueScreenController.swift */; };
+		D8D21B901DBE4155006AE367 /* SearchByIdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8F1DBE4155006AE367 /* SearchByIdController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTableCell.swift; sourceTree = "<group>"; };
 		D8D21B8B1DB6A62B006AE367 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		D8D21B8D1DBD1E1F006AE367 /* QueueScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueScreenController.swift; sourceTree = "<group>"; };
+		D8D21B8F1DBE4155006AE367 /* SearchByIdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchByIdController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				D84E776A1DAA7AF200DB9DE0 /* AppDelegate.swift */,
 				D84E776C1DAA7AF200DB9DE0 /* ViewController.swift */,
 				D84E776E1DAA7AF200DB9DE0 /* Main.storyboard */,
+				D8D21B8F1DBE4155006AE367 /* SearchByIdController.swift */,
 				D8D21B8D1DBD1E1F006AE367 /* QueueScreenController.swift */,
 				D84E77711DAA7AF200DB9DE0 /* Assets.xcassets */,
 				D84E77731DAA7AF200DB9DE0 /* LaunchScreen.storyboard */,
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */,
+				D8D21B901DBE4155006AE367 /* SearchByIdController.swift in Sources */,
 				D8D21B8E1DBD1E1F006AE367 /* QueueScreenController.swift in Sources */,
 				D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */,
 				D81669251DB4D553000D7C43 /* DataSource.swift in Sources */,

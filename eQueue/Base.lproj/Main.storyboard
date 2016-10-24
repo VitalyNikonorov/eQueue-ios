@@ -161,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irU-xZ-R4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3261.5999999999999" y="123.68815592203899"/>
+            <point key="canvasLocation" x="3262" y="124"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="sE9-HV-PnX">
@@ -201,10 +201,10 @@
             </objects>
             <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
         </scene>
-        <!--View Controller-->
+        <!--Search By Id Controller-->
         <scene sceneID="9O4-JW-qU7">
             <objects>
-                <viewController id="g6H-mq-UjG" sceneMemberID="viewController">
+                <viewController id="g6H-mq-UjG" customClass="SearchByIdController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vmi-CY-3UU"/>
                         <viewControllerLayoutGuide type="bottom" id="JM3-nL-DT9"/>
@@ -212,7 +212,32 @@
                     <view key="view" contentMode="scaleToFill" id="euc-d4-P9s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="id_search_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ADW-GT-ixU"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fJn-2u-l5q">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ng6-b6-Rxj">
+                                <state key="normal" title="Find">
+                                    <color key="titleColor" red="0.16078431369999999" green="0.08235294118" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="gvN-0m-yWF" kind="show" identifier="showQueueSegue" id="fgr-Zy-LXi"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ADW-GT-ixU" firstAttribute="centerX" secondItem="euc-d4-P9s" secondAttribute="centerX" id="4sT-S6-bJk"/>
+                            <constraint firstItem="fJn-2u-l5q" firstAttribute="leading" secondItem="euc-d4-P9s" secondAttribute="leadingMargin" constant="40" id="NB4-tX-WG1"/>
+                            <constraint firstItem="ng6-b6-Rxj" firstAttribute="centerX" secondItem="fJn-2u-l5q" secondAttribute="centerX" id="QjH-Ux-Gyh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fJn-2u-l5q" secondAttribute="trailing" constant="40" id="UjD-st-RxG"/>
+                            <constraint firstItem="fJn-2u-l5q" firstAttribute="top" secondItem="ADW-GT-ixU" secondAttribute="bottom" constant="70" id="WYW-5h-Bxp"/>
+                            <constraint firstItem="ADW-GT-ixU" firstAttribute="top" secondItem="Vmi-CY-3UU" secondAttribute="bottom" constant="42" id="irX-SK-MXg"/>
+                            <constraint firstItem="ng6-b6-Rxj" firstAttribute="top" secondItem="fJn-2u-l5q" secondAttribute="bottom" constant="30" id="whd-cL-PTt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="d8t-ap-oLA"/>
                 </viewController>
@@ -359,6 +384,7 @@
         <image name="bluetooth" width="22" height="24"/>
         <image name="group" width="20" height="16"/>
         <image name="id" width="19" height="24"/>
+        <image name="id_search_icon" width="92" height="92"/>
         <image name="list" width="24" height="22"/>
         <image name="place" width="14" height="20"/>
         <image name="qr" width="24" height="24"/>
@@ -366,4 +392,7 @@
         <image name="queue_icon" width="64" height="60"/>
         <image name="search_geo" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fgr-Zy-LXi"/>
+    </inferredMetricsTieBreakers>
 </document>
