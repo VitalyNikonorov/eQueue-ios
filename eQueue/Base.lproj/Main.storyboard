@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RUG-dW-5P4" id="XdG-7O-tXW">
-                                            <frame key="frameInset" width="375" height="199.5"/>
+                                            <frame key="frameInset" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="vtb-fW-UiC">
@@ -152,16 +152,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IRZ-Ga-AGn">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="C0z-K3-x02"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="IRZ-Ga-AGn" secondAttribute="trailing" id="koQ-4K-caQ"/>
+                            <constraint firstItem="IRZ-Ga-AGn" firstAttribute="leading" secondItem="H63-Bw-JNL" secondAttribute="leading" id="r9C-kP-OYX"/>
+                            <constraint firstItem="IRZ-Ga-AGn" firstAttribute="top" secondItem="AEn-7J-PP1" secondAttribute="bottom" id="yfi-h0-tZb"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="queueMapView" destination="IRZ-Ga-AGn" id="zTO-N8-zZV"/>
                         <outlet property="queueSizeLabel" destination="UTy-ko-zqh" id="k5a-L8-nUM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irU-xZ-R4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3262" y="124"/>
+            <point key="canvasLocation" x="3261.5" y="123.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="247-LV-2Ra">
@@ -237,13 +248,6 @@
                     <view key="view" contentMode="scaleToFill" id="7R5-Ee-5Zv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJk-vv-y6l">
-                                <frame key="frameInset" minX="164" minY="210" width="46" height="138"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Uk-bA-YsK"/>
@@ -369,7 +373,6 @@
         <!--Geo Search View Controller-->
         <scene sceneID="bku-Fm-Yhw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="83C-8c-W6g" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Ru7-ZD-zyL" customClass="GeoSearchViewController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="epJ-CU-FBY"/>
@@ -386,7 +389,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TTl-Y7-K9G" id="Zj6-CD-eSe">
-                                            <frame key="frameInset" width="375" height="199"/>
+                                            <frame key="frameInset" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="IpA-Qo-mtV">
@@ -489,6 +492,7 @@
                         <outlet property="tableView" destination="1Hj-0p-TkQ" id="URk-J5-YmL"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="83C-8c-W6g" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2017" y="-1325"/>
         </scene>

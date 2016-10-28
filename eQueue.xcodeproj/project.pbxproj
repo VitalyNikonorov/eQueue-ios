@@ -16,6 +16,7 @@
 		D84E77751DAA7AF200DB9DE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84E77731DAA7AF200DB9DE0 /* LaunchScreen.storyboard */; };
 		D84E77801DAA7AF200DB9DE0 /* eQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E777F1DAA7AF200DB9DE0 /* eQueueTests.swift */; };
 		D84E778B1DAA7AF200DB9DE0 /* eQueueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */; };
+		D89C1D601DC3E0B200B5AEFC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89C1D5F1DC3E0B200B5AEFC /* MapKit.framework */; };
 		D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */; };
 		D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8B1DB6A62B006AE367 /* Queue.swift */; };
 		D8D21B8E1DBD1E1F006AE367 /* QueueScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8D1DBD1E1F006AE367 /* QueueScreenController.swift */; };
@@ -55,6 +56,7 @@
 		D84E77861DAA7AF200DB9DE0 /* eQueueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eQueueUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eQueueUITests.swift; sourceTree = "<group>"; };
 		D84E778C1DAA7AF200DB9DE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D89C1D5F1DC3E0B200B5AEFC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTableCell.swift; sourceTree = "<group>"; };
 		D8D21B8B1DB6A62B006AE367 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		D8D21B8D1DBD1E1F006AE367 /* QueueScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueScreenController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89C1D601DC3E0B200B5AEFC /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +96,7 @@
 				D84E777E1DAA7AF200DB9DE0 /* eQueueTests */,
 				D84E77891DAA7AF200DB9DE0 /* eQueueUITests */,
 				D84E77681DAA7AF200DB9DE0 /* Products */,
+				D89C1D5E1DC3E0B200B5AEFC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +145,14 @@
 				D84E778C1DAA7AF200DB9DE0 /* Info.plist */,
 			);
 			path = eQueueUITests;
+			sourceTree = "<group>";
+		};
+		D89C1D5E1DC3E0B200B5AEFC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D89C1D5F1DC3E0B200B5AEFC /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +225,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = V3J88R4YSC;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					D84E777A1DAA7AF200DB9DE0 = {
 						CreatedOnToolsVersion = 8.0;
