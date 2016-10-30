@@ -38,7 +38,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eQueue/QueueScreenController.swift"
@@ -49,6 +49,38 @@
             endingLineNumber = "27"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "eQueue.QueueScreenController.viewDidLoad () -&gt; ()"
+                  moduleName = "eQueue"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vitaly/Documents/coding/iOS/eQueue/eQueue/QueueScreenController.swift"
+                  timestampString = "499511221.270886"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "1516">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "eQueue.QueueScreenController.viewDidLoad () -&gt; ()"
+                  moduleName = "eQueue"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vitaly/Documents/coding/iOS/eQueue/eQueue/QueueScreenController.swift"
+                  timestampString = "499511221.272833"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "2376">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
