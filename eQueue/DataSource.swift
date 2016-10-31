@@ -13,6 +13,7 @@ class DataSource {
     private var json: Any?
     private var jsonResponse: Any?
     private var queues: [Queue]?
+    private var token: String?
     
     
     //Network
@@ -69,10 +70,13 @@ class DataSource {
         
         let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print("Body: \(strData)")
-            let _: NSError?
             do {
+                let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                
+                self.token = (jsonResponse?["body"] as! Dictionary<String, AnyObject>)["token"] as! String?
+                
+//                print("token: " + (self.token)!)
+                let _: NSError?
                 _ = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? NSDictionary
             } catch let err as NSError {
                 print(err)
