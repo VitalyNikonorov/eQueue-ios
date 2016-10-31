@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchByIdController : ViewController {
+class SearchByIdController : UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showQueueSegue"{
