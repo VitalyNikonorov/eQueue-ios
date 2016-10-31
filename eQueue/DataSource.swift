@@ -15,12 +15,16 @@ class DataSource {
     private var queues: [Queue]?
     private var token: String?
     
+    static let sharedInstance: DataSource = {
+        let instance = DataSource()
+        return instance
+    }()
     
     //Network
     let networkSession = URLSession(configuration: URLSessionConfiguration.ephemeral)
     var createUserTask: URLSessionDataTask?
     
-    init() {
+    private init() {
         dataString = "[{\"qid\": 1, \"name\": \"my Queue1\", \"description\": \"Description\", \"users_quantity\": 5, \"address\": \"\\u041d\\u0435\\u0438\\u0437\\u0432\\u0435\\u0441\\u0442\\u043d\\u043e\", \"wait_time\": 2, \"in_front\": 1, \"number\": 2, \"coords\": \"55.7648773124,37.6858637854\"}, {\"qid\": 3, \"name\": \"my Queue2\", \"description\": \"Description2\", \"users_quantity\": 52, \"address\": \"\\u041b\\u0435\\u0444\\u043e\\u0440\\u0442\\u043e\\u0432\\u0441\\u043a\\u0430\\u044f \\u043d\\u0430\\u0431\\u0435\\u0440\\u0435\\u0436\\u043d\\u0430\\u044f\", \"wait_time\": 22, \"in_front\": 12, \"number\": 22, \"coords\": \"55.7648773124,37.6858637854\"}, {\"qid\": 6, \"name\": \"my Queue3\", \"description\": \"Description2\", \"users_quantity\": 52, \"address\": \"address2\", \"wait_time\": 22, \"in_front\": 12, \"number\": 22, \"coords\": \"55.7648773124,37.6858637854\"}, {\"qid\": 33, \"name\": \"my Queue4\", \"description\": \"Description23\", \"users_quantity\": 532, \"address\": \"address23\", \"wait_time\": 232, \"in_front\": 132, \"number\": 232, \"coords\": \"\"}]"
         
         let data = dataString?.data(using: .utf8)!

@@ -12,7 +12,7 @@ class SearchByIdController : UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showQueueSegue"{
-            let dataSource: DataSource = DataSource()
+            let dataSource: DataSource = DataSource.sharedInstance
             let destinationVC = segue.destination as? QueueScreenController
             destinationVC?.queue = dataSource.getMyQueues()[0]
         }

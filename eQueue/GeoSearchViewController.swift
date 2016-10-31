@@ -10,7 +10,7 @@ import UIKit
 
 class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
-    var dataSource: DataSource = DataSource()
+    var dataSource: DataSource = DataSource.sharedInstance
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (dataSource.getMyQueues().count)
