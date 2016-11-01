@@ -10,9 +10,12 @@ import UIKit
 
 class SearchByIdController : UIViewController {
 
+    let dataSource: DataSource = DataSource.sharedInstance
+    @IBAction func findBtnClick(_ sender: Any) {
+        dataSource.findQueueById(qid: 1)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showQueueSegue"{
-            let dataSource: DataSource = DataSource.sharedInstance
             let destinationVC = segue.destination as? QueueScreenController
             destinationVC?.queue = dataSource.getMyQueues()[0]
         }
