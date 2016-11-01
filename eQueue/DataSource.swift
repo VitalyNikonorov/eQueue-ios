@@ -59,35 +59,41 @@ class DataSource {
     ///// NETWORK
     func createUser(email: String?, password: String?, token: String?) {
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://equeue.org/api/user/create/") as! URL)
-        request.httpMethod = "POST"
-        let params = ["email" : email, "password": password, "token": token] as Dictionary<String, String?>
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: (params as [String : Any]), options: .prettyPrinted)
-            request.httpBody = jsonData
-        } catch let error as NSError {
-            print(error)
-        }
-        
-        
-        let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
-            print("Response: \(response)")
+        self.token = KeyChainService.loadToken() as String?
+        print("loaded token: \(self.token as String!)")
+        if (self.token == nil) {
+            let request = NSMutableURLRequest(url: NSURL(string: "http://equeue.org/api/user/create/") as! URL)
+            request.httpMethod = "POST"
+            let params = ["email" : email, "password": password, "token": token] as Dictionary<String, String?>
             do {
-                let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                
-                self.token = (jsonResponse?["body"] as! Dictionary<String, AnyObject>)["token"] as! String?
-                
-//                print("token: " + (self.token)!)
-                let _: NSError?
-                _ = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? NSDictionary
-            } catch let err as NSError {
-                print(err)
-                let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print("Error could not parse JSON: '\(jsonStr)'")
+                let jsonData = try JSONSerialization.data(withJSONObject: (params as [String : Any]), options: .prettyPrinted)
+                request.httpBody = jsonData
+            } catch let error as NSError {
+                print(error)
             }
-        })
         
-        task.resume()
+            let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+                print("Response: \(response)")
+                do {
+                    let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                
+                    self.token = (jsonResponse?["body"] as! Dictionary<String, AnyObject>)["token"] as! String?
+                
+                    print("servers token: \(self.token! as String)")
+                    KeyChainService.saveToken(token: (self.token as String!) as NSString)
+                    
+                    print("loaded from KC token: \(KeyChainService.loadToken() as String?)")
+                    
+                    let _: NSError?
+                    _ = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? NSDictionary
+                } catch let err as NSError {
+                    print(err)
+                    let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                    print("Error could not parse JSON: '\(jsonStr)'")
+                }
+            })
+            task.resume()
+        }
     }
     
     ///// NETWORK

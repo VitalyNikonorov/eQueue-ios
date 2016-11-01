@@ -16,6 +16,7 @@
 		D84E77751DAA7AF200DB9DE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84E77731DAA7AF200DB9DE0 /* LaunchScreen.storyboard */; };
 		D84E77801DAA7AF200DB9DE0 /* eQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E777F1DAA7AF200DB9DE0 /* eQueueTests.swift */; };
 		D84E778B1DAA7AF200DB9DE0 /* eQueueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */; };
+		D88363601DC903DB008089DA /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883635F1DC903DB008089DA /* KeyChainService.swift */; };
 		D89C1D601DC3E0B200B5AEFC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89C1D5F1DC3E0B200B5AEFC /* MapKit.framework */; };
 		D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */; };
 		D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D21B8B1DB6A62B006AE367 /* Queue.swift */; };
@@ -56,6 +57,7 @@
 		D84E77861DAA7AF200DB9DE0 /* eQueueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eQueueUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84E778A1DAA7AF200DB9DE0 /* eQueueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eQueueUITests.swift; sourceTree = "<group>"; };
 		D84E778C1DAA7AF200DB9DE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D883635F1DC903DB008089DA /* KeyChainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 		D89C1D5F1DC3E0B200B5AEFC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTableCell.swift; sourceTree = "<group>"; };
 		D8D21B8B1DB6A62B006AE367 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				D8D21B851DB61BC0006AE367 /* QueueTableCell.swift */,
 				D8D21B8B1DB6A62B006AE367 /* Queue.swift */,
 				D84E44271DBF53EF00A2BEBB /* GeoSearchViewController.swift */,
+				D883635F1DC903DB008089DA /* KeyChainService.swift */,
 			);
 			path = eQueue;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				D84E44281DBF53EF00A2BEBB /* GeoSearchViewController.swift in Sources */,
 				D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */,
 				D8D21B901DBE4155006AE367 /* SearchByIdController.swift in Sources */,
+				D88363601DC903DB008089DA /* KeyChainService.swift in Sources */,
 				D8D21B8E1DBD1E1F006AE367 /* QueueScreenController.swift in Sources */,
 				D8D21B861DB61BC0006AE367 /* QueueTableCell.swift in Sources */,
 				D81669251DB4D553000D7C43 /* DataSource.swift in Sources */,
