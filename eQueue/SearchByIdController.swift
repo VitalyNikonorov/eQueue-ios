@@ -10,6 +10,12 @@ import UIKit
 
 class SearchByIdController : UIViewController, QueueCallback {
     
+    @IBOutlet var idTextField: UITextField!
+    
+    override func viewDidLoad() {
+        self.idTextField.keyboardType = UIKeyboardType.numberPad
+    }
+    
     internal func onQueueInfoLoaded(response: Dictionary<String, AnyObject>) {
         
         guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "QueueController") as? QueueScreenController else {

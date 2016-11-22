@@ -24,8 +24,8 @@ class Queue {
     public private(set) var descriprion: String?
     public private(set) var location: String?
     
-    public private(set) var waitingTime: Int?
-    public private(set) var size: Int?
-    public private(set) var forwardMe: Int?
+    public private(set) var waitingTime: Int
+    public private(set) var size: Int
+    public private(set) var forwardMe: Int
     public private(set) var coords: String?
 }

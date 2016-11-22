@@ -14,14 +14,18 @@ class QueueScreenController : UIViewController {
     var queue : Queue!
     
     @IBOutlet var queueMapView: MKMapView!
-    @IBOutlet var queueSizeLabel: UILabel!
-    @IBOutlet var queueNameLabel: UILabel!
+    
+    @IBOutlet var qWaitingLbl: UILabel!
+    @IBOutlet var qInFrontLbl: UILabel!
+    @IBOutlet var qSizeLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        queueSizeLabel.text = String(describing: queue.size)
-        queueNameLabel.text = String(describing: queue.name)
+        qWaitingLbl.text = String(describing: queue.waitingTime)
+        qSizeLbl.text = String(describing: queue.size)
+        
+        qInFrontLbl.text = ( (queue.forwardMe > -1) ? String(describing: queue.forwardMe) : "-")
         
         title = queue.name
 //        let geocoder = CLGeocoder()
