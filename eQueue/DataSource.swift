@@ -47,7 +47,6 @@ class DataSource {
         }
         
         return list
-        
     }
 
     public func getMyQueues() -> Array<Queue> {
@@ -97,7 +96,7 @@ class DataSource {
     }
     
     ///// NETWORK
-    func findQueueById(qid: Int) {
+    func findQueueById(qid: Int, callBack: QueueCallback) {
         
         let request = NSMutableURLRequest(url: NSURL(string: "http://equeue.org/api/queue/info-user/") as! URL)
         request.httpMethod = "POST"
@@ -110,29 +109,16 @@ class DataSource {
         request.setValue(postLength, forHTTPHeaderField: "Content-Length")
         request.httpBody = postData
         
-//        let params = ["token" : self.token as Optional<AnyObject>, "qid": qid as Optional<AnyObject>] as Dictionary<String, AnyObject?>
-//        do {
-//            let jsonData = try JSONSerialization.data(withJSONObject: (params as [String : Any]), options: .prettyPrinted)
-//            request.httpBody = jsonData
-//        } catch let error as NSError {
-//            print(error)
-//        }
-//
         let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             print("Response: \(response)")
-            do {
-                let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print("Body: \(strData)")
+            
+            let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+
                 
-                print(jsonResponse?["body"] as! String)
-                let _: NSError?
-                _ = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? NSDictionary
-            } catch let err as NSError {
-                print(err)
-                let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print("Error could not parse JSON: '\(jsonStr)'")
-            }
+//                let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//                print("Error could not parse JSON: '\(jsonStr)'")
+                
+            callBack.onQueueInfoLoaded(response: jsonResponse!)
         })
         
         task.resume()

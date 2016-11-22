@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RUG-dW-5P4" id="XdG-7O-tXW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="vtb-fW-UiC">
@@ -154,7 +154,7 @@
         <!--Queue Screen Controller-->
         <scene sceneID="Q3K-hh-3IW">
             <objects>
-                <viewController id="gvN-0m-yWF" customClass="QueueScreenController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QueueController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gvN-0m-yWF" customClass="QueueScreenController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AEn-7J-PP1"/>
                         <viewControllerLayoutGuide type="bottom" id="lym-HO-AzS"/>
@@ -176,6 +176,13 @@
                                     <constraint firstAttribute="height" constant="150" id="C0z-K3-x02"/>
                                 </constraints>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="QueueNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pde-EP-hf2">
+                                <rect key="frame" x="120" y="251" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -186,12 +193,13 @@
                     </view>
                     <connections>
                         <outlet property="queueMapView" destination="IRZ-Ga-AGn" id="zTO-N8-zZV"/>
+                        <outlet property="queueNameLabel" destination="Pde-EP-hf2" id="MJr-AG-xMz"/>
                         <outlet property="queueSizeLabel" destination="UTy-ko-zqh" id="k5a-L8-nUM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irU-xZ-R4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3261.5" y="123.5"/>
+            <point key="canvasLocation" x="3260" y="122.78860569715144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="247-LV-2Ra">
@@ -410,10 +418,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QueueCell" id="TTl-Y7-K9G" customClass="QueueTableCell" customModule="eQueue" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="200"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TTl-Y7-K9G" id="Zj6-CD-eSe">
-                                            <rect key="frame" x="0.0" y="0.0" width="1000" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="IpA-Qo-mtV">

@@ -15,11 +15,14 @@ class QueueScreenController : UIViewController {
     
     @IBOutlet var queueMapView: MKMapView!
     @IBOutlet var queueSizeLabel: UILabel!
+    @IBOutlet var queueNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         queueSizeLabel.text = String(describing: queue.size)
+        queueNameLabel.text = String(describing: queue.name)
+        
         title = queue.name
 //        let geocoder = CLGeocoder()
         let annotation = MKPointAnnotation()
