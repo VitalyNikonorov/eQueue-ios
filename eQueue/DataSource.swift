@@ -158,14 +158,18 @@ class DataSource {
     }
     
     func joinQueue(qid: Int, callBack: JoinCallback) {
-        let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/queue/join/") as! URL)
-        request.httpMethod = "POST"
-        request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
+        
+//        let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/queue/join/") as! URL)
+//        request.httpMethod = "POST"
+//        request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
         let post = "token=\(self.token! as String)&qid=\(qid)"
-        let postData = post.data(using: String.Encoding.ascii, allowLossyConversion: true)
-        let postLength = "\(postData?.count)"
-        request.setValue(postLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
-        request.httpBody = postData
+//        let postData = post.data(using: String.Encoding.ascii, allowLossyConversion: true)
+//        let postLength = "\(postData?.count)"
+//        request.setValue(postLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
+//        request.httpBody = postData
+        
+        let request = createRequest(url: NSURL(string: "\(URL_BASE)/api/queue/join/") as! URL, requestMethod: HTTPRequestMethod.post, requestData: post)
+        
         let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             print("Response: \(response)")
             do {
@@ -177,9 +181,17 @@ class DataSource {
         task.resume()
     }
 
-    
-//    @FormUrlEncoded
-//    @POST("/api/queue/join/")
-//    Call<ResponseBase<PossibleError>> joinQueue(@Field("token") String token, @Field("qid") int qid);
+    private func createRequest (url: URL, requestMethod: HTTPRequestMethod, requestData: String) -> NSMutableURLRequest {
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = requestMethod.rawValue
+        request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
+        let data = requestData.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        let dataLength = "\(data?.count)"
+        request.setValue(dataLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
+        request.httpBody = data
+        
+        return request
+    }
 }
 
