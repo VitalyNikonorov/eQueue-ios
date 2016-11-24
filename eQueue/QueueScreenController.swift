@@ -44,7 +44,7 @@ class QueueScreenController : UIViewController, JoinCallback {
         
     }
     @IBAction func joinBtnTaped(_ sender: Any) {
-        
+        dataSource.joinQueue(qid: queue.qid, callBack: self)
     }
 }
 

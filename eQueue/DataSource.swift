@@ -43,7 +43,7 @@ class DataSource {
         if  anyObj is Array<AnyObject> {
             
             for json in anyObj as! Array<AnyObject>{
-                let q = Queue( name: (json["name"] as AnyObject? as? String) ?? "", description: (json["description"] as AnyObject? as? String) ?? "", location: (json["address"] as AnyObject? as? String) ?? "", waitingTime: (json["wait_time"] as AnyObject? as? Int) ?? 0, size: (json["number"] as AnyObject? as? Int) ?? 0, forwardMe: (json["in_front"] as AnyObject? as? Int) ?? 0, coords: (json["coords"] as AnyObject? as? String) ?? "")
+                let q = Queue( qid: (json["qid"] as AnyObject? as? Int) ?? -1,name: (json["name"] as AnyObject? as? String) ?? "", description: (json["description"] as AnyObject? as? String) ?? "", location: (json["address"] as AnyObject? as? String) ?? "", waitingTime: (json["wait_time"] as AnyObject? as? Int) ?? 0, size: (json["number"] as AnyObject? as? Int) ?? 0, forwardMe: (json["in_front"] as AnyObject? as? Int) ?? 0, coords: (json["coords"] as AnyObject? as? String) ?? "")
                 list.append(q)
             }
         }
@@ -132,7 +132,6 @@ class DataSource {
         let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/user/check-token/") as! URL)
         request.httpMethod = "POST"
         request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
-        print(self.token ?? "empty token")
         let post = "token=\(self.token! as String)"
         let postData = post.data(using: String.Encoding.ascii, allowLossyConversion: true)
         let postLength = "\(postData?.count)"
@@ -162,6 +161,20 @@ class DataSource {
         let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/queue/join/") as! URL)
         request.httpMethod = "POST"
         request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
+        let post = "token=\(self.token! as String)&qid=\(qid)"
+        let postData = post.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        let postLength = "\(postData?.count)"
+        request.setValue(postLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
+        request.httpBody = postData
+        let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            print("Response: \(response)")
+            do {
+                let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                callBack.onJoinResponse(response: jsonResponse!)
+            
+            }
+        })
+        task.resume()
     }
 
     

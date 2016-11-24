@@ -1,5 +1,5 @@
 //
-//  HTTPRequestField.swift
+//  HTTPUtils.swift
 //  eQueue
 //
 //  Created by Виталий Никоноров on 24.11.16.
@@ -13,4 +13,9 @@ enum HTTPRequestField: String {
     case contentType = "Content-Type"
     case contentLength = "Content-Length"
     
+}
+
+enum HTTPRequestMethod: String {
+    case post = "POST"
+    case get = "GET"
 }

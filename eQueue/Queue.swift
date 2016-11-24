@@ -10,7 +10,8 @@ import Foundation
 
 class Queue {
 
-    init(name: String, description: String?, location: String?, waitingTime: Int, size: Int, forwardMe: Int, coords: String?){
+    init(qid: Int, name: String, description: String?, location: String?, waitingTime: Int, size: Int, forwardMe: Int, coords: String?){
+        self.qid = qid
         self.name = name
         self.descriprion = description
         self.location = location
@@ -20,6 +21,7 @@ class Queue {
         self.coords = coords
     }
     
+    public private(set) var qid: Int
     public private(set) var name: String?
     public private(set) var descriprion: String?
     public private(set) var location: String?
