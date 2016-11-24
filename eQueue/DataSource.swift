@@ -14,6 +14,8 @@ class DataSource {
     private var jsonResponse: Any?
     private var queues: [Queue]?
     private var token: String?
+    private let URL_BASE = "http://equeue.org"
+    private let CONTENT_TYPE = "application/x-www-form-urlencoded"
     
     static let sharedInstance: DataSource = {
         let instance = DataSource()
@@ -61,7 +63,7 @@ class DataSource {
         self.token = KeyChainService.loadToken() as String?
         print("loaded token: \(self.token as String!)")
         if (self.token == nil) {
-            let request = NSMutableURLRequest(url: NSURL(string: "http://equeue.org/api/user/create/") as! URL)
+            let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/user/create/") as! URL)
             request.httpMethod = "POST"
             let params = ["email" : email, "password": password, "token": token] as Dictionary<String, String?>
             do {
@@ -98,15 +100,15 @@ class DataSource {
     ///// NETWORK
     func findQueueById(qid: Int, callBack: QueueCallback) {
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://equeue.org/api/queue/info-user/") as! URL)
+        let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/queue/info-user/") as! URL)
         request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
         print("token:")
         print(self.token ?? "empty token")
         let post = "token=\(self.token! as String)&qid=\(qid)"
         let postData = post.data(using: String.Encoding.ascii, allowLossyConversion: true)
         let postLength = "\(postData?.count)"
-        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue(postLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
         request.httpBody = postData
         
         let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
@@ -127,14 +129,14 @@ class DataSource {
     ///// NETWORK
     func checkToken() {
         
-        let request = NSMutableURLRequest(url: NSURL(string: "http://equeue.org/api/user/check-token/") as! URL)
+        let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/user/check-token/") as! URL)
         request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
         print(self.token ?? "empty token")
         let post = "token=\(self.token! as String)"
         let postData = post.data(using: String.Encoding.ascii, allowLossyConversion: true)
         let postLength = "\(postData?.count)"
-        request.setValue(postLength, forHTTPHeaderField: "Content-Length")
+        request.setValue(postLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
         request.httpBody = postData
         let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             print("Response: \(response)")
@@ -155,6 +157,16 @@ class DataSource {
         
         task.resume()
     }
+    
+    func joinQueue(qid: Int, callBack: JoinCallback) {
+        let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/queue/join/") as! URL)
+        request.httpMethod = "POST"
+        request.setValue(CONTENT_TYPE, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
+    }
 
+    
+//    @FormUrlEncoded
+//    @POST("/api/queue/join/")
+//    Call<ResponseBase<PossibleError>> joinQueue(@Field("token") String token, @Field("qid") int qid);
 }
 

@@ -9,9 +9,15 @@
 import UIKit
 import MapKit
 
-class QueueScreenController : UIViewController {
+class QueueScreenController : UIViewController, JoinCallback {
+    
+    internal func onJoinResponse(response: Dictionary<String, AnyObject>) {
+        print(response)
+    }
+
 
     var queue : Queue!
+    let dataSource = DataSource.sharedInstance
     
     @IBOutlet var queueMapView: MKMapView!
     
@@ -37,4 +43,11 @@ class QueueScreenController : UIViewController {
         queueMapView.showAnnotations([annotation], animated: true)
         
     }
+    @IBAction func joinBtnTaped(_ sender: Any) {
+        
+    }
+}
+
+protocol JoinCallback {
+    func onJoinResponse(response: Dictionary<String, AnyObject>);
 }

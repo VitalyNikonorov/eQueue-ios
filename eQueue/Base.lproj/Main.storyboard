@@ -175,6 +175,9 @@
                                 <state key="normal" title="ПРИСОЕДИНИТЬСЯ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="joinBtnTaped:" destination="gvN-0m-yWF" eventType="touchUpInside" id="9Ze-hn-f4q"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_info_oval" translatesAutoresizingMaskIntoConstraints="NO" id="LPP-Ec-Nx6">
                                 <rect key="frame" x="16" y="164" width="94" height="94"/>
