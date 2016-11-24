@@ -15,6 +15,12 @@ enum HTTPRequestField: String {
     
 }
 
+enum HTTPContentType: String {
+    
+    case urlencoded = "application/x-www-form-urlencoded"
+    case json = "application/json"
+}
+
 enum HTTPRequestMethod: String {
     case post = "POST"
     case get = "GET"
