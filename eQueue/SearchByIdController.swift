@@ -48,7 +48,3 @@ class SearchByIdController : UIViewController, QueueCallback {
     }
     
 }
-
-protocol QueueCallback {
-    func onQueueInfoLoaded(response: Dictionary<String, AnyObject>);
-}

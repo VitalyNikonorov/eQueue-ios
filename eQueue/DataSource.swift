@@ -46,7 +46,6 @@ class DataSource {
                 list.append(q)
             }
         }
-        
         return list
     }
 
@@ -76,16 +75,12 @@ class DataSource {
         self.token = KeyChainService.loadToken() as String?
         print("loaded token: \(self.token as String!)")
         if (self.token == nil) {
-            let request = NSMutableURLRequest(url: NSURL(string: "\(URL_BASE)/api/user/create/") as! URL)
-            request.httpMethod = "POST"
-            let params = ["email" : email, "password": password, "token": token] as Dictionary<String, String?>
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: (params as [String : Any]), options: .prettyPrinted)
-                request.httpBody = jsonData
-            } catch let error as NSError {
-                print(error)
-            }
-        
+            
+            let post = "email=\(email! as String)&password=\(password! as String)&token=\(token! as String)"
+            let url = NSURL(string: "\(URL_BASE)/api/user/create/") as! URL
+            let request = createRequest(url: url, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
+            print("create user")
+            
             let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
                 print("Response: \(response)")
                 do {
@@ -157,7 +152,6 @@ class DataSource {
     
     func joinQueue(qid: Int, callBack: JoinCallback) {
         
-
         let post = "token=\(self.token! as String)&qid=\(qid)"
         let request = createRequest(url: NSURL(string: "\(URL_BASE)/api/queue/join/") as! URL, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
         
@@ -166,6 +160,22 @@ class DataSource {
             do {
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                 callBack.onJoinResponse(response: jsonResponse!)
+            }
+        })
+        task.resume()
+    }
+    
+    func myQueues(callBack: QueueListCallback) {
+        
+        let post = "token=\(self.token! as String)"
+        let request = createRequest(url: NSURL(string: "\(URL_BASE)/api/queue/in-queue/") as! URL, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
+        
+        let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            do {
+                let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                let queues = self.parseJson(anyObj: (jsonResponse!["body"] as! Dictionary<String, AnyObject>)["queues"]!)
+                
+                callBack.onQueueListResponse(response: queues)
             }
         })
         task.resume()

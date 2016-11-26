@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MyQueuesVC.swift
 //  eQueue
 //
 //  Created by Виталий Никоноров on 09.10.16.
@@ -8,33 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, QueueListCallback {
     @IBOutlet var tableView: UITableView!
     
     var dataSource: DataSource = DataSource.sharedInstance
+    private var myQueues: Array<Queue> = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataSource.getMyQueues().count)
+        return (myQueues.count)
     };
     
     func tableView(_ tableView:  UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "QueueCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QueueTableCell
         
-        cell.queueName.text = dataSource.getMyQueues()[indexPath.row].name
-        cell.queueDescription.text = dataSource.getMyQueues()[indexPath.row].descriprion
-        cell.locationLabel.text = dataSource.getMyQueues()[indexPath.row].location
+        cell.queueName.text = myQueues[indexPath.row].name
+        cell.queueDescription.text = myQueues[indexPath.row].descriprion
+        cell.locationLabel.text = myQueues[indexPath.row].location
         
-        cell.forwardMeLabel.text = String(describing: dataSource.getMyQueues()[indexPath.row].forwardMe)
-        cell.sizeLabel.text = String(describing: dataSource.getMyQueues()[indexPath.row].size)
-        cell.waitingTimeLabel.text = String(describing: dataSource.getMyQueues()[indexPath.row].waitingTime)
-        
+        cell.forwardMeLabel.text = String(describing: myQueues[indexPath.row].forwardMe)
+        cell.sizeLabel.text = String(describing: myQueues[indexPath.row].size)
+        cell.waitingTimeLabel.text = String(describing: myQueues[indexPath.row].waitingTime)
         
         return cell
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.myQueues(callBack: self)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -49,6 +50,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let destinationVC = segue.destination as? QueueScreenController
                 destinationVC?.queue = dataSource.getMyQueues()[indexPath.row]
             }
+        }
+    }
+    
+    func onQueueListResponse(response: Array<Queue>) {
+        DispatchQueue.main.async {
+            self.myQueues = response
+            self.tableView.reloadData()
         }
     }
 

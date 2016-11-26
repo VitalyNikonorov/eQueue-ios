@@ -47,7 +47,3 @@ class QueueScreenController : UIViewController, JoinCallback {
         dataSource.joinQueue(qid: queue.qid, callBack: self)
     }
 }
-
-protocol JoinCallback {
-    func onJoinResponse(response: Dictionary<String, AnyObject>);
-}
