@@ -34,7 +34,8 @@ class DataSource {
         if  anyObj is Array<AnyObject> {
             
             for json in anyObj as! Array<AnyObject>{
-                let q = Queue( qid: (json["qid"] as AnyObject? as? Int) ?? -1,name: (json["name"] as AnyObject? as? String) ?? "", description: (json["description"] as AnyObject? as? String) ?? "", location: (json["address"] as AnyObject? as? String) ?? "", waitingTime: (json["wait_time"] as AnyObject? as? Int) ?? 0, size: (json["number"] as AnyObject? as? Int) ?? 0, forwardMe: (json["in_front"] as AnyObject? as? Int) ?? 0, coords: (json["coords"] as AnyObject? as? String) ?? "")
+                print (json)
+                let q = Queue( qid: (json["qid"] as AnyObject? as? Int) ?? -1,name: (json["name"] as AnyObject? as? String) ?? "", description: (json["description"] as AnyObject? as? String) ?? "", location: (json["address"] as AnyObject? as? String) ?? "", waitingTime: (json["wait_time"] as AnyObject? as? Int) ?? 0, size: (json["number"] as AnyObject? as? Int) ?? 0, forwardMe: (json["in_front"] as AnyObject? as? Int) ?? 0, coords: (json["coords"] as AnyObject? as? String) ?? "", myNumber: (json["number"] as AnyObject? as? Int) ?? 0)
                 list.append(q)
             }
         }

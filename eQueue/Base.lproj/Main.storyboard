@@ -163,6 +163,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpJ-d8-GOu">
+                                <rect key="frame" x="0.0" y="212" width="375" height="406"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket" translatesAutoresizingMaskIntoConstraints="NO" id="aJD-OB-IsF">
+                                        <rect key="frame" x="61" y="76.5" width="252" height="253"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="486-4R-eMz">
+                                        <rect key="frame" x="175" y="179.5" width="25" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="486-4R-eMz" firstAttribute="centerY" secondItem="RpJ-d8-GOu" secondAttribute="centerY" id="99t-Im-AWC"/>
+                                    <constraint firstAttribute="trailing" secondItem="aJD-OB-IsF" secondAttribute="trailing" constant="62" id="U5x-ai-DXH"/>
+                                    <constraint firstItem="aJD-OB-IsF" firstAttribute="top" secondItem="RpJ-d8-GOu" secondAttribute="top" constant="76.5" id="cRy-SQ-1k9"/>
+                                    <constraint firstAttribute="bottom" secondItem="aJD-OB-IsF" secondAttribute="bottom" constant="76.5" id="gYg-TW-e7x"/>
+                                    <constraint firstItem="486-4R-eMz" firstAttribute="centerX" secondItem="RpJ-d8-GOu" secondAttribute="centerX" id="moa-Qp-OE1"/>
+                                    <constraint firstItem="aJD-OB-IsF" firstAttribute="leading" secondItem="RpJ-d8-GOu" secondAttribute="leading" constant="61" id="tI5-yA-hZq"/>
+                                </constraints>
+                            </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IRZ-Ga-AGn">
                                 <rect key="frame" x="0.0" y="64" width="375" height="150"/>
                                 <constraints>
@@ -243,6 +266,7 @@
                             <constraint firstItem="KUW-95-MBc" firstAttribute="centerX" secondItem="Y8A-t6-ZeR" secondAttribute="centerX" id="6QG-vc-sZV"/>
                             <constraint firstItem="5TN-vQ-97w" firstAttribute="centerY" secondItem="aWR-EX-4AB" secondAttribute="centerY" id="6br-MN-geS"/>
                             <constraint firstItem="vuT-QQ-nbr" firstAttribute="centerY" secondItem="sXU-AH-fNM" secondAttribute="centerY" id="8At-MN-DRA"/>
+                            <constraint firstItem="lym-HO-AzS" firstAttribute="top" secondItem="RpJ-d8-GOu" secondAttribute="bottom" id="8n3-ze-klP"/>
                             <constraint firstItem="vuT-QQ-nbr" firstAttribute="centerX" secondItem="sXU-AH-fNM" secondAttribute="centerX" id="BUs-MR-WNE"/>
                             <constraint firstItem="g4j-ka-3dc" firstAttribute="leading" secondItem="H63-Bw-JNL" secondAttribute="leadingMargin" id="DT6-AN-Ztt"/>
                             <constraint firstItem="g4j-ka-3dc" firstAttribute="trailing" secondItem="H63-Bw-JNL" secondAttribute="trailingMargin" id="H5r-us-9QG"/>
@@ -253,6 +277,7 @@
                             <constraint firstItem="LPP-Ec-Nx6" firstAttribute="leading" secondItem="H63-Bw-JNL" secondAttribute="leadingMargin" id="RJB-Q1-lZp"/>
                             <constraint firstItem="SY4-Ec-XaM" firstAttribute="centerX" secondItem="sXU-AH-fNM" secondAttribute="centerX" id="Rl7-fv-fvL"/>
                             <constraint firstItem="ws8-6y-JIW" firstAttribute="centerX" secondItem="SY4-Ec-XaM" secondAttribute="centerX" id="ZaM-py-Gpz"/>
+                            <constraint firstItem="RpJ-d8-GOu" firstAttribute="leading" secondItem="H63-Bw-JNL" secondAttribute="leading" id="aSl-wD-Bf7"/>
                             <constraint firstItem="sXU-AH-fNM" firstAttribute="top" secondItem="AEn-7J-PP1" secondAttribute="bottom" constant="100" id="cfc-3m-DFa"/>
                             <constraint firstItem="puj-gy-AOr" firstAttribute="bottom" secondItem="Y8A-t6-ZeR" secondAttribute="bottom" id="h4G-sc-Dt2"/>
                             <constraint firstItem="Y8A-t6-ZeR" firstAttribute="trailing" secondItem="H63-Bw-JNL" secondAttribute="trailingMargin" id="jK2-qp-6Gg"/>
@@ -262,17 +287,21 @@
                             <constraint firstItem="IRZ-Ga-AGn" firstAttribute="leading" secondItem="H63-Bw-JNL" secondAttribute="leading" id="r9C-kP-OYX"/>
                             <constraint firstItem="lym-HO-AzS" firstAttribute="top" secondItem="g4j-ka-3dc" secondAttribute="bottom" constant="8" id="r9o-ah-HTl"/>
                             <constraint firstItem="XfZ-9t-BFe" firstAttribute="centerY" secondItem="puj-gy-AOr" secondAttribute="centerY" id="rfZ-0V-H2S"/>
+                            <constraint firstAttribute="trailing" secondItem="RpJ-d8-GOu" secondAttribute="trailing" id="sMx-tV-okr"/>
                             <constraint firstItem="SY4-Ec-XaM" firstAttribute="bottom" secondItem="sXU-AH-fNM" secondAttribute="bottom" id="suN-ta-yYj"/>
+                            <constraint firstItem="RpJ-d8-GOu" firstAttribute="top" secondItem="IRZ-Ga-AGn" secondAttribute="bottom" constant="-2" id="tSF-q5-Lo3"/>
                             <constraint firstItem="XfZ-9t-BFe" firstAttribute="centerX" secondItem="puj-gy-AOr" secondAttribute="centerX" id="uN2-Pf-ACy"/>
                             <constraint firstItem="IRZ-Ga-AGn" firstAttribute="top" secondItem="AEn-7J-PP1" secondAttribute="bottom" id="yfi-h0-tZb"/>
                             <constraint firstItem="MX9-If-Nh4" firstAttribute="centerY" secondItem="LPP-Ec-Nx6" secondAttribute="centerY" id="zS9-Pz-q4r"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="myNumberInQ" destination="486-4R-eMz" id="kmR-MH-W7X"/>
                         <outlet property="qInFrontLbl" destination="vuT-QQ-nbr" id="zez-nx-vwi"/>
                         <outlet property="qSizeLbl" destination="MX9-If-Nh4" id="Y64-RA-5GB"/>
                         <outlet property="qWaitingLbl" destination="KUW-95-MBc" id="9JE-nZ-qF1"/>
                         <outlet property="queueMapView" destination="IRZ-Ga-AGn" id="zTO-N8-zZV"/>
+                        <outlet property="tiketImage" destination="aJD-OB-IsF" id="xTr-5W-t8i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irU-xZ-R4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -638,6 +667,7 @@
         <image name="queue_info_oval" width="94" height="94"/>
         <image name="queue_info_subtitle" width="90" height="15"/>
         <image name="search_geo" width="24" height="24"/>
+        <image name="ticket" width="252" height="253"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Bd-5a-RfU"/>
