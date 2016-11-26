@@ -9,7 +9,7 @@
 import Foundation
 
 protocol QueueCallback {
-    func onQueueInfoLoaded(response: Dictionary<String, AnyObject>);
+    func onQueueInfoLoaded(response: Queue);
 }
 
 protocol JoinCallback {

@@ -53,7 +53,7 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         if segue.identifier == "showQueueSegue" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let destinationVC = segue.destination as? QueueScreenController
-                destinationVC?.queue = queues[indexPath.row]
+                destinationVC?.qid = queues[indexPath.row].qid
             }
         }
     }

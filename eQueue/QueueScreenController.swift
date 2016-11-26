@@ -9,16 +9,18 @@
 import UIKit
 import MapKit
 
-class QueueScreenController : UIViewController, JoinCallback {
+class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
     
     internal func onJoinResponse(response: Dictionary<String, AnyObject>) {
         print(response)
     }
+    
+    var qid : Int!
 
-
-    var queue : Queue!
+    private var queue : Queue!
     let dataSource = DataSource.sharedInstance
     
+    @IBOutlet var joinBtn: UIButton!
     @IBOutlet var queueMapView: MKMapView!
     
     @IBOutlet var qWaitingLbl: UILabel!
@@ -30,7 +32,14 @@ class QueueScreenController : UIViewController, JoinCallback {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        self.updateView()
+        dataSource.findQueueById(qid: qid, callBack: self)
+    }
+    
+    func onQueueInfoLoaded(response: Queue) {
+        self.queue = response
+        DispatchQueue.main.async {
+            self.updateView()
+        }
     }
     
     private func updateView(){
@@ -41,11 +50,13 @@ class QueueScreenController : UIViewController, JoinCallback {
             qInFrontLbl.text = String(describing: queue.forwardMe)
             myNumberInQ.isHidden = false
             myNumberInQ.text = String(describing: queue.myNumber)
-            tiketImage.isHidden = true
+            tiketImage.isHidden = false
+            joinBtn.isHidden = true
         } else {
             qInFrontLbl.text = "-"
             myNumberInQ.isHidden = true
             tiketImage.isHidden = true
+            joinBtn.isHidden = false
         }
         
         title = queue.name

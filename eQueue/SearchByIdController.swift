@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchByIdController : UIViewController, QueueCallback {
+class SearchByIdController : UIViewController {
     
     @IBOutlet var idTextField: UITextField!
     
@@ -24,31 +24,33 @@ class SearchByIdController : UIViewController, QueueCallback {
     func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    internal func onQueueInfoLoaded(response: Dictionary<String, AnyObject>) {
-        
-        guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "QueueController") as? QueueScreenController else {
-            print("Could not instantiate view controller with identifier of type SecondViewController")
-            return
-        }
-        
-        let bodyJson = response["body"] as! Dictionary<String, AnyObject>
-        
-        let q = Queue( qid: (bodyJson["qid"] as AnyObject? as? Int) ?? -1, name: (bodyJson["name"] as AnyObject? as? String) ?? "", description: (bodyJson["description"] as AnyObject? as? String) ?? "", location: (bodyJson["address"] as AnyObject? as? String) ?? "", waitingTime: (bodyJson["wait_time"] as AnyObject? as? Int) ?? 0, size: (bodyJson["number"] as AnyObject? as? Int) ?? 0, forwardMe: (bodyJson["in_front"] as AnyObject? as? Int) ?? 0, coords: (bodyJson["coords"] as AnyObject? as? String) ?? "", myNumber: (bodyJson["number"] as AnyObject? as? Int) ?? 0)
-        
-        vc.queue = q
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(vc, animated:true)
-        }
-    }
-
 
     let dataSource: DataSource = DataSource.sharedInstance
     @IBAction func findBtnClick(_ sender: Any) {
-        let id = idTextField.text
         
-        if(!(id?.isEmpty)!){
-            dataSource.findQueueById(qid: Int(id!)!, callBack: self)
+        let id = Int(idTextField.text!)
+        
+        if(id != nil){
+            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "QueueController") as? QueueScreenController else {
+                print("Could not instantiate view controller with identifier of type SecondViewController")
+                return
+            }
+            
+            vc.qid = Int(id!)
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(vc, animated:true)
+            }
+        } else {
+            self.showAlert(message: "Значение id должно быть числом!")
         }
+    }
+    
+    private func showAlert(message: String){
+        let alert = UIAlertController(title: "Недопустимое значение", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
