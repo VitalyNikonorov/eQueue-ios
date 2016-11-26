@@ -48,7 +48,7 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         if segue.identifier == "showQueueSegue"{
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let destinationVC = segue.destination as? QueueScreenController
-                destinationVC?.queue = dataSource.getMyQueues()[indexPath.row]
+                destinationVC?.queue = myQueues[indexPath.row]
             }
         }
     }

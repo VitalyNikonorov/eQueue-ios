@@ -9,10 +9,8 @@
 import Foundation
 
 class DataSource {
-    var dataString: String?
     private var json: Any?
     private var jsonResponse: Any?
-    private var queues: [Queue]?
     private var token: String?
     private let URL_BASE = "http://equeue.org"
     
@@ -27,12 +25,6 @@ class DataSource {
     
     private init() {
         createUser(email: nil, password: nil, token: nil)
-        dataString = "[{\"qid\": 1, \"name\": \"my Queue1\", \"description\": \"Description\", \"users_quantity\": 5, \"address\": \"\\u041d\\u0435\\u0438\\u0437\\u0432\\u0435\\u0441\\u0442\\u043d\\u043e\", \"wait_time\": 2, \"in_front\": 1, \"number\": 2, \"coords\": \"55.7648773124,37.6858637854\"}, {\"qid\": 3, \"name\": \"my Queue2\", \"description\": \"Description2\", \"users_quantity\": 52, \"address\": \"\\u041b\\u0435\\u0444\\u043e\\u0440\\u0442\\u043e\\u0432\\u0441\\u043a\\u0430\\u044f \\u043d\\u0430\\u0431\\u0435\\u0440\\u0435\\u0436\\u043d\\u0430\\u044f\", \"wait_time\": 22, \"in_front\": 12, \"number\": 22, \"coords\": \"55.7648773124,37.6858637854\"}, {\"qid\": 6, \"name\": \"my Queue3\", \"description\": \"Description2\", \"users_quantity\": 52, \"address\": \"address2\", \"wait_time\": 22, \"in_front\": 12, \"number\": 22, \"coords\": \"55.7648773124,37.6858637854\"}, {\"qid\": 33, \"name\": \"my Queue4\", \"description\": \"Description23\", \"users_quantity\": 532, \"address\": \"address23\", \"wait_time\": 232, \"in_front\": 132, \"number\": 232, \"coords\": \"\"}]"
-        
-        let data = dataString?.data(using: .utf8)!
-        
-        json = try? JSONSerialization.jsonObject(with: data!)
-        queues = parseJson(anyObj: json as AnyObject)
     }
     
     func parseJson(anyObj:AnyObject) -> Array<Queue>{
@@ -48,12 +40,6 @@ class DataSource {
         }
         return list
     }
-
-    public func getMyQueues() -> Array<Queue> {
-        return self.queues!
-    }
-    
-    
     
     ///// NETWORK
     
@@ -61,11 +47,16 @@ class DataSource {
         
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = requestMethod.rawValue
-        request.setValue(contentType.rawValue, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
-        let data = requestData.data(using: String.Encoding.ascii, allowLossyConversion: true)
-        let dataLength = "\(data?.count)"
-        request.setValue(dataLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
-        request.httpBody = data
+        
+        if (requestMethod != HTTPRequestMethod.get){
+            request.setValue(contentType.rawValue, forHTTPHeaderField: HTTPRequestField.contentType.rawValue)
+            
+            let data = requestData.data(using: String.Encoding.ascii, allowLossyConversion: true)
+            let dataLength = "\(data?.count)"
+            
+            request.setValue(dataLength, forHTTPHeaderField: HTTPRequestField.contentLength.rawValue)
+            request.httpBody = data
+        }
         
         return request
     }
@@ -169,6 +160,21 @@ class DataSource {
         
         let post = "token=\(self.token! as String)"
         let request = createRequest(url: NSURL(string: "\(URL_BASE)/api/queue/in-queue/") as! URL, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
+        
+        let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
+            do {
+                let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                let queues = self.parseJson(anyObj: (jsonResponse!["body"] as! Dictionary<String, AnyObject>)["queues"]!)
+                
+                callBack.onQueueListResponse(response: queues)
+            }
+        })
+        task.resume()
+    }
+    
+    func getNearQueues(coords: String, callBack: QueueListCallback) {
+        
+        let request = createRequest(url: NSURL(string: "\(URL_BASE)/api/queue/find_near/?coords=\(coords)") as! URL, requestMethod: HTTPRequestMethod.get, contentType: HTTPContentType.none, requestData: "")
         
         let task = networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
             do {

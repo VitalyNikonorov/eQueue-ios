@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My QueuesVC-->
+        <!--Мои очереди-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MyQueuesVC" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
@@ -142,7 +142,7 @@
                             <constraint firstItem="djL-N0-ehD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mJ5-hd-JrD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Qsz-HS-cRh"/>
+                    <navigationItem key="navigationItem" title="Мои очереди" id="Qsz-HS-cRh"/>
                     <connections>
                         <outlet property="tableView" destination="djL-N0-ehD" id="UGw-BQ-VHm"/>
                     </connections>
@@ -298,7 +298,7 @@
             </objects>
             <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
         </scene>
-        <!--Search By Id Controller-->
+        <!--Искать по id-->
         <scene sceneID="9O4-JW-qU7">
             <objects>
                 <viewController id="g6H-mq-UjG" customClass="SearchByIdController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
@@ -340,7 +340,7 @@
                             <constraint firstItem="ng6-b6-Rxj" firstAttribute="top" secondItem="fJn-2u-l5q" secondAttribute="bottom" constant="30" id="whd-cL-PTt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="d8t-ap-oLA"/>
+                    <navigationItem key="navigationItem" title="Искать по id" id="d8t-ap-oLA"/>
                     <connections>
                         <outlet property="idTextField" destination="fJn-2u-l5q" id="65K-gv-Wgy"/>
                     </connections>
@@ -349,7 +349,7 @@
             </objects>
             <point key="canvasLocation" x="2017" y="876"/>
         </scene>
-        <!--View Controller-->
+        <!--Очереди с маячками-->
         <scene sceneID="UFn-RT-8dE">
             <objects>
                 <viewController id="Ffm-Ch-IFn" sceneMemberID="viewController">
@@ -362,7 +362,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7Uk-bA-YsK"/>
+                    <navigationItem key="navigationItem" title="Очереди с маячками" id="7Uk-bA-YsK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y90-oU-UPA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -482,7 +482,7 @@
             </objects>
             <point key="canvasLocation" x="1121" y="1826"/>
         </scene>
-        <!--Geo Search View Controller-->
+        <!--Очереди рядом-->
         <scene sceneID="bku-Fm-Yhw">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Ru7-ZD-zyL" customClass="GeoSearchViewController" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
@@ -614,7 +614,7 @@
                             <constraint firstItem="1Hj-0p-TkQ" firstAttribute="leading" secondItem="osG-aR-MmJ" secondAttribute="leading" id="nAs-lP-sTm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MJ8-Cb-lMA"/>
+                    <navigationItem key="navigationItem" title="Очереди рядом" id="MJ8-Cb-lMA"/>
                     <connections>
                         <outlet property="tableView" destination="1Hj-0p-TkQ" id="URk-J5-YmL"/>
                     </connections>

@@ -19,6 +19,7 @@ enum HTTPContentType: String {
     
     case urlencoded = "application/x-www-form-urlencoded"
     case json = "application/json"
+    case none = ""
 }
 
 enum HTTPRequestMethod: String {

@@ -7,13 +7,30 @@
 //
 
 import UIKit
+import CoreLocation
 
-class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, QueueListCallback {
     @IBOutlet var tableView: UITableView!
     var dataSource: DataSource = DataSource.sharedInstance
-
+    var locationManager : CLLocationManager = CLLocationManager()
+    var queues : Array<Queue> = []
+    
+    override func viewDidLoad() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func onQueueListResponse(response: Array<Queue>) {
+        DispatchQueue.main.async {
+            self.queues = response
+            self.tableView.reloadData()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataSource.getMyQueues().count)
+        return (queues.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -21,13 +38,13 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QueueTableCell
         
-        cell.queueName.text = dataSource.getMyQueues()[indexPath.row].name
-        cell.queueDescription.text = dataSource.getMyQueues()[indexPath.row].descriprion
-        cell.locationLabel.text = dataSource.getMyQueues()[indexPath.row].location
+        cell.queueName.text = queues[indexPath.row].name
+        cell.queueDescription.text = queues[indexPath.row].descriprion
+        cell.locationLabel.text = queues[indexPath.row].location
         
-        cell.forwardMeLabel.text = String(describing: dataSource.getMyQueues()[indexPath.row].forwardMe)
-        cell.sizeLabel.text = String(describing: dataSource.getMyQueues()[indexPath.row].size)
-        cell.waitingTimeLabel.text = String(describing: dataSource.getMyQueues()[indexPath.row].waitingTime)
+        cell.forwardMeLabel.text = String(describing: queues[indexPath.row].forwardMe)
+        cell.sizeLabel.text = String(describing: queues[indexPath.row].size)
+        cell.waitingTimeLabel.text = String(describing: queues[indexPath.row].waitingTime)
         
         return cell
     }
@@ -36,9 +53,19 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         if segue.identifier == "showQueueSegue" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let destinationVC = segue.destination as? QueueScreenController
-                destinationVC?.queue = dataSource.getMyQueues()[indexPath.row]
+                destinationVC?.queue = queues[indexPath.row]
             }
         }
     }
-
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print (error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("locations = \(locations.last?.coordinate.latitude)")
+        locationManager.stopUpdatingLocation()
+        let coords = "\((locations.last?.coordinate.latitude)! as CLLocationDegrees),\((locations.last?.coordinate.longitude)! as CLLocationDegrees)"
+        dataSource.getNearQueues(coords: coords, callBack: self)
+    }
 }
