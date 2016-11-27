@@ -15,10 +15,23 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
     var locationManager : CLLocationManager = CLLocationManager()
     var queues : Array<Queue> = []
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(GeoSearchViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(self.refreshControl)
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
+        updateData()
+    }
+
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        updateData()
+    }
+    
+    func updateData(){
         locationManager.startUpdatingLocation()
     }
     
@@ -26,6 +39,7 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         DispatchQueue.main.async {
             self.queues = response
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
     }
     

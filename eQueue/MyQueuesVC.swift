@@ -14,6 +14,8 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     var dataSource: DataSource = DataSource.sharedInstance
     private var myQueues: Array<Queue> = []
     
+    let refreshControl = UIRefreshControl()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (myQueues.count)
     };
@@ -35,7 +37,17 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.myQueues(callBack: self)
+        refreshControl.addTarget(self, action: #selector(MyQueuesVC.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl)
+        updateData()
+    }
+    
+    func handleRefresh(_ refreshControl: UIRefreshControl){
+        updateData()
+    }
+    
+    func updateData(){
+        dataSource.getMyQueues(callBack: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +67,8 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         DispatchQueue.main.async {
             self.myQueues = response
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+            self.refreshControl.endRefreshing()
         }
     }
 

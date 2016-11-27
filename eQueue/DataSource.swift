@@ -199,7 +199,7 @@ class DataSource {
     /**
      * Function for requesting user's list of queues
      */
-    func myQueues(callBack: QueueListCallback) {
+    func getMyQueues(callBack: QueueListCallback) {
         concurrentRequestQueue.async{
             let post = "token=\(self.token! as String)"
             let request = self.createRequest(url: NSURL(string: "\(self.URL_BASE)/api/queue/in-queue/") as! URL, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
