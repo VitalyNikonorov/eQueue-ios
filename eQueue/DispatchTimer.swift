@@ -26,25 +26,25 @@ class DispatchTimer: NSObject {
     /// :param: timer The timer which triggered this block
     typealias TimerHandler = (DispatchTimer) -> Void
     
-    private let timerBlock: TimerHandler
-    private let queue: dispatch_queue_t
-    private let delay: NSTimeInterval
+    fileprivate let timerBlock: TimerHandler
+    fileprivate let queue: DispatchQueue
+    fileprivate let delay: TimeInterval
     
-    private var wrappedBlock: (() -> Void)?
-    private let source: dispatch_source_t
+    fileprivate var wrappedBlock: (() -> Void)?
+    fileprivate let source: DispatchSource
     
-    init(delay: NSTimeInterval, queue: dispatch_queue_t, block: TimerHandler) {
+    init(delay: TimeInterval, queue: DispatchQueue, block: @escaping TimerHandler) {
         timerBlock = block
         self.queue = queue
         self.delay = delay
         
-        self.source = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.queue)
+        self.source = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: 0), queue: self.queue) /*Migrator FIXME: Use DispatchSourceTimer to avoid the cast*/ as! DispatchSource
         
         super.init()
         
         let wrapper = { () -> Void in
-            if dispatch_source_testcancel(self.source) == 0 {
-                dispatch_source_cancel(self.source)
+            if self.source.isCancelled == false {
+                self.source.cancel()
                 self.timerBlock(self)
             }
         }
@@ -52,9 +52,9 @@ class DispatchTimer: NSObject {
         self.wrappedBlock = wrapper
     }
     
-    class func scheduledDispatchTimer(delay: NSTimeInterval,
-                                      queue: dispatch_queue_t,
-                                      block: TimerHandler) -> DispatchTimer {
+    class func scheduledDispatchTimer(_ delay: TimeInterval,
+                                      queue: DispatchQueue,
+                                      block: @escaping TimerHandler) -> DispatchTimer {
         let dt = DispatchTimer(delay: delay, queue: queue, block: block)
         dt.schedule()
         return dt
@@ -62,28 +62,31 @@ class DispatchTimer: NSObject {
     
     func schedule() {
         self.reschedule()
-        dispatch_source_set_event_handler(self.source, self.wrappedBlock)
-        dispatch_resume(self.source)
+        self.source.setEventHandler(handler: self.wrappedBlock)
+        self.source.resume()
     }
     
     func reschedule() {
-        let start = dispatch_time(DISPATCH_TIME_NOW, Int64(self.delay * Double(NSEC_PER_SEC)))
+        let start = DispatchTime.now() + Double(Int64(self.delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
         // Leeway is 10% of timer delay
-        dispatch_source_set_timer(self.source, start, DISPATCH_TIME_FOREVER,
-                                  UInt64((self.delay / 10.0) * Double(NSEC_PER_SEC)))
+        
+
+        self.source.scheduleOneshot(deadline: start, leeway: DispatchTimeInterval.seconds(2))
+//        self.source.setTimer(start: start, interval: DispatchTime.distantFuture,
+//                             leeway: UInt64((self.delay / 10.0) * Double(NSEC_PER_SEC)))
     }
     
     func suspend() {
-        dispatch_suspend(self.source)
+        self.source.suspend()
     }
     
     func resume() {
-        dispatch_resume(self.source)
+        self.source.resume()
     }
     
     func cancel() {
-        dispatch_source_cancel(self.source)
+        self.source.cancel()
     }
     
 }

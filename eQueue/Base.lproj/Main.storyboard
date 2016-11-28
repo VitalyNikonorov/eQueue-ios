@@ -385,7 +385,7 @@
         <!--Очереди с маячками-->
         <scene sceneID="UFn-RT-8dE">
             <objects>
-                <viewController id="Ffm-Ch-IFn" sceneMemberID="viewController">
+                <viewController id="Ffm-Ch-IFn" customClass="BeaconsVC" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Omj-kR-Fqv"/>
                         <viewControllerLayoutGuide type="bottom" id="Qzf-md-mPe"/>

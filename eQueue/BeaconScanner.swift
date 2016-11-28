@@ -20,10 +20,10 @@ import CoreBluetooth
 ///
 /// Implement this to receive notifications about beacons.
 protocol BeaconScannerDelegate {
-    func didFindBeacon(beaconScanner: BeaconScanner, beaconInfo: BeaconInfo)
-    func didLoseBeacon(beaconScanner: BeaconScanner, beaconInfo: BeaconInfo)
-    func didUpdateBeacon(beaconScanner: BeaconScanner, beaconInfo: BeaconInfo)
-    func didObserveURLBeacon(beaconScanner: BeaconScanner, URL: NSURL, RSSI: Int)
+    func didFindBeacon(_ beaconScanner: BeaconScanner, beaconInfo: BeaconInfo)
+    func didLoseBeacon(_ beaconScanner: BeaconScanner, beaconInfo: BeaconInfo)
+    func didUpdateBeacon(_ beaconScanner: BeaconScanner, beaconInfo: BeaconInfo)
+    func didObserveURLBeacon(_ beaconScanner: BeaconScanner, URL: URL, RSSI: Int)
 }
 
 ///
@@ -41,13 +41,13 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
     ///
     var onLostTimeout: Double = 15.0
     
-    private var centralManager: CBCentralManager!
-    private let beaconOperationsQueue: dispatch_queue_t =
-        dispatch_queue_create("beacon_operations_queue", nil)
-    private var shouldBeScanning: Bool = false
+    fileprivate var centralManager: CBCentralManager!
+    fileprivate let beaconOperationsQueue: DispatchQueue =
+        DispatchQueue(label: "beacon_operations_queue", attributes: [])
+    fileprivate var shouldBeScanning: Bool = false
     
-    private var seenEddystoneCache = [String : [String : AnyObject]]()
-    private var deviceIDCache = [NSUUID : NSData]()
+    fileprivate var seenEddystoneCache = [String : [String : AnyObject]]()
+    fileprivate var deviceIDCache = [UUID : Data]()
     
     override init() {
         super.init()
@@ -61,7 +61,7 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
     /// scanning.
     ///
     func startScanning() {
-        dispatch_async(self.beaconOperationsQueue) {
+        self.beaconOperationsQueue.async {
             self.startScanningSynchronized()
         }
     }
@@ -76,8 +76,8 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
     ///
     /// MARK - private methods and delegate callbacks
     ///
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        if central.state == CBCentralManagerState.PoweredOn && self.shouldBeScanning {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == CBManagerState.poweredOn && self.shouldBeScanning {
             self.startScanningSynchronized();
         }
     }
@@ -86,29 +86,29 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
     /// Core Bluetooth CBCentralManager callback when we discover a beacon. We're not super
     /// interested in any error situations at this point in time.
     ///
-    func centralManager(central: CBCentralManager,
-                        didDiscoverPeripheral peripheral: CBPeripheral,
-                        advertisementData: [String : AnyObject],
-                        RSSI: NSNumber) {
+    func centralManager(_ central: CBCentralManager,
+                        didDiscover peripheral: CBPeripheral,
+                        advertisementData: [String : Any],
+                        rssi RSSI: NSNumber) {
         if let serviceData = advertisementData[CBAdvertisementDataServiceDataKey]
-            as? [NSObject : AnyObject] {
+            as? [AnyHashable: Any] {
             var eft: BeaconInfo.EddystoneFrameType
             eft = BeaconInfo.frameTypeForFrame(serviceData)
             
             // If it's a telemetry frame, stash it away and we'll send it along with the next regular
             // frame we see. Otherwise, process the UID frame.
-            if eft == BeaconInfo.EddystoneFrameType.TelemetryFrameType {
+            if eft == BeaconInfo.EddystoneFrameType.telemetryFrameType {
                 deviceIDCache[peripheral.identifier] = BeaconInfo.telemetryDataForFrame(serviceData)
-            } else if eft == BeaconInfo.EddystoneFrameType.UIDFrameType
-                || eft == BeaconInfo.EddystoneFrameType.EIDFrameType {
+            } else if eft == BeaconInfo.EddystoneFrameType.uidFrameType
+                || eft == BeaconInfo.EddystoneFrameType.eidFrameType {
                 let telemetry = self.deviceIDCache[peripheral.identifier]
                 let serviceUUID = CBUUID(string: "FEAA")
-                let _RSSI: Int = RSSI.integerValue
+                let _RSSI: Int = RSSI.intValue
                 
                 if let
-                    beaconServiceData = serviceData[serviceUUID] as? NSData,
-                    beaconInfo =
-                    (eft == BeaconInfo.EddystoneFrameType.UIDFrameType
+                    beaconServiceData = serviceData[serviceUUID] as? Data,
+                    let beaconInfo =
+                    (eft == BeaconInfo.EddystoneFrameType.uidFrameType
                         ? BeaconInfo.beaconInfoForUIDFrameData(beaconServiceData, telemetry: telemetry,
                                                                RSSI: _RSSI)
                         : BeaconInfo.beaconInfoForEIDFrameData(beaconServiceData, telemetry: telemetry,
@@ -119,7 +119,7 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
                     //       for this beacon, or delete it until we get a new / "fresh" TLM frame.
                     //       We'll treat it as "report it only when you see it", so we'll delete it
                     //       each time.
-                    self.deviceIDCache.removeValueForKey(peripheral.identifier)
+                    self.deviceIDCache.removeValue(forKey: peripheral.identifier)
                     
                     if (self.seenEddystoneCache[beaconInfo.beaconID.description] != nil) {
                         // Reset the onLost timer and fire the didUpdate.
@@ -136,15 +136,15 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
                         
                         let onLostTimer = DispatchTimer.scheduledDispatchTimer(
                             self.onLostTimeout,
-                            queue: dispatch_get_main_queue()) {
+                            queue: DispatchQueue.main) {
                                 (timer: DispatchTimer) -> () in
                                 let cacheKey = beaconInfo.beaconID.description
                                 if let
                                     beaconCache = self.seenEddystoneCache[cacheKey],
-                                    lostBeaconInfo = beaconCache["beaconInfo"] as? BeaconInfo {
+                                    let lostBeaconInfo = beaconCache["beaconInfo"] as? BeaconInfo {
                                     self.delegate?.didLoseBeacon(self, beaconInfo: lostBeaconInfo)
-                                    self.seenEddystoneCache.removeValueForKey(
-                                        beaconInfo.beaconID.description)
+                                    self.seenEddystoneCache.removeValue(
+                                        forKey: beaconInfo.beaconID.description)
                                 }
                         }
                         
@@ -154,13 +154,13 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
                         ]
                     }
                 }
-            } else if eft == BeaconInfo.EddystoneFrameType.URLFrameType {
+            } else if eft == BeaconInfo.EddystoneFrameType.urlFrameType {
                 let serviceUUID = CBUUID(string: "FEAA")
-                let _RSSI: Int = RSSI.integerValue
+                let _RSSI: Int = RSSI.intValue
                 
                 if let
-                    beaconServiceData = serviceData[serviceUUID] as? NSData,
-                    URL = BeaconInfo.parseURLFromFrame(beaconServiceData) {
+                    beaconServiceData = serviceData[serviceUUID] as? Data,
+                    let URL = BeaconInfo.parseURLFromFrame(beaconServiceData) {
                     self.delegate?.didObserveURLBeacon(self, URL: URL, RSSI: _RSSI)
                 }
             }
@@ -169,15 +169,15 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
         }
     }
     
-    private func startScanningSynchronized() {
-        if self.centralManager.state != CBCentralManagerState.PoweredOn {
+    fileprivate func startScanningSynchronized() {
+        if self.centralManager.state != CBManagerState.poweredOn {
             NSLog("CentralManager state is %d, cannot start scan", self.centralManager.state.rawValue)
             self.shouldBeScanning = true
         } else {
             NSLog("Starting to scan for Eddystones")
             let services = [CBUUID(string: "FEAA")]
             let options = [CBCentralManagerScanOptionAllowDuplicatesKey : true]
-            self.centralManager.scanForPeripheralsWithServices(services, options: options)
+            self.centralManager.scanForPeripherals(withServices: services, options: options)
         }
     }
 }
