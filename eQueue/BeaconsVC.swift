@@ -8,18 +8,22 @@
 
 import UIKit
 
-class BeaconsVC: UIViewController, BeaconScannerDelegate {
+class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITableViewDataSource, UITableViewDelegate {
     
 
     var beaconScanner: BeaconScanner!
     let URL_PATTERN = "http://equeue/"
+    var dataSet = Set<Int>()
+    
+    var dataSource: DataSource = DataSource.sharedInstance
+    private var beaconQueues: Array<Queue> = []
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.beaconScanner = BeaconScanner()
         self.beaconScanner!.delegate = self
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +32,33 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.beaconScanner.stopScanning()
+    }
+    
+    func onQueueInfoLoaded(response: Queue) {
+        DispatchQueue.main.async {
+            print("loaded \(response.qid)")
+            self.beaconQueues.append(response)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (beaconQueues.count)
+    };
+    
+    func tableView(_ tableView:  UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "QueueCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QueueTableCell
+        
+        cell.queueName.text = beaconQueues[indexPath.row].name
+        cell.queueDescription.text = beaconQueues[indexPath.row].descriprion
+        cell.locationLabel.text = beaconQueues[indexPath.row].location
+        
+        cell.forwardMeLabel.text = String(describing: beaconQueues[indexPath.row].forwardMe)
+        cell.sizeLabel.text = String(describing: beaconQueues[indexPath.row].size)
+        cell.waitingTimeLabel.text = String(describing: beaconQueues[indexPath.row].waitingTime)
+        
+        return cell
     }
     
     func didFindBeacon(_ beaconScanner: BeaconScanner, beaconInfo: BeaconInfo) {
@@ -46,17 +77,18 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate {
             
             let id = Int(URL.absoluteString.substring(from: URL_PATTERN.endIndex))
             
-            //TODO
-            
-            guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "QueueController") as? QueueScreenController else {
-                print("Could not instantiate view controller with identifier of type SecondViewController")
+            guard id != nil else {
+                print("id is nil")
                 return
             }
             
-            vc.qid = Int(id!)
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(vc, animated:true)
+            guard !dataSet.contains(id!) else {
+                print("id = \(id) contains")
+                return
             }
+        
+            dataSet.insert(id!)
+            dataSource.findQueueById(qid: id!, callBack: self)
         }
 
         
