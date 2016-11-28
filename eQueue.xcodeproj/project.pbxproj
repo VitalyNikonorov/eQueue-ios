@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D81669251DB4D553000D7C43 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81669241DB4D553000D7C43 /* DataSource.swift */; };
 		D82F2B341DEB76DA00362918 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F2B331DEB76DA00362918 /* TabBarController.swift */; };
+		D82F2B361DEC1EFF00362918 /* QRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F2B351DEC1EFF00362918 /* QRCodeVC.swift */; };
 		D84E44281DBF53EF00A2BEBB /* GeoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E44271DBF53EF00A2BEBB /* GeoSearchViewController.swift */; };
 		D84E776B1DAA7AF200DB9DE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E776A1DAA7AF200DB9DE0 /* AppDelegate.swift */; };
 		D84E776D1DAA7AF200DB9DE0 /* MyQueuesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E776C1DAA7AF200DB9DE0 /* MyQueuesVC.swift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		D81669241DB4D553000D7C43 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		D82F2B331DEB76DA00362918 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D82F2B351DEC1EFF00362918 /* QRCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeVC.swift; sourceTree = "<group>"; };
 		D84E44271DBF53EF00A2BEBB /* GeoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoSearchViewController.swift; sourceTree = "<group>"; };
 		D84E77671DAA7AF200DB9DE0 /* eQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84E776A1DAA7AF200DB9DE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				D84E776A1DAA7AF200DB9DE0 /* AppDelegate.swift */,
 				D84E776C1DAA7AF200DB9DE0 /* MyQueuesVC.swift */,
 				D84E776E1DAA7AF200DB9DE0 /* Main.storyboard */,
+				D82F2B351DEC1EFF00362918 /* QRCodeVC.swift */,
 				D82F2B331DEB76DA00362918 /* TabBarController.swift */,
 				D8D21B8F1DBE4155006AE367 /* SearchByIdController.swift */,
 				D8D21B8D1DBD1E1F006AE367 /* QueueScreenController.swift */,
@@ -307,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D82F2B361DEC1EFF00362918 /* QRCodeVC.swift in Sources */,
 				D879D3651DE78A8800BAB910 /* HTTPUtils.swift in Sources */,
 				D84E44281DBF53EF00A2BEBB /* GeoSearchViewController.swift in Sources */,
 				D8D21B8C1DB6A62B006AE367 /* Queue.swift in Sources */,
