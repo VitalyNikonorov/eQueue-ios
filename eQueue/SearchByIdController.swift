@@ -14,6 +14,7 @@ class SearchByIdController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
         let tapOutside: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchByIdController.dismissKeyboard))
         view.addGestureRecognizer(tapOutside)

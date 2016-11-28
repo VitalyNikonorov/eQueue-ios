@@ -37,6 +37,7 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         refreshControl.addTarget(self, action: #selector(MyQueuesVC.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
         updateData()
