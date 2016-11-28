@@ -418,7 +418,7 @@
             </objects>
             <point key="canvasLocation" x="1057" y="-603"/>
         </scene>
-        <!--CodeVC-->
+        <!--Сканировать QR код-->
         <scene sceneID="xao-ps-SIP">
             <objects>
                 <viewController id="Bmz-Rk-bKt" customClass="QRCodeVC" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
@@ -431,7 +431,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="6hR-9j-eIg"/>
+                    <navigationItem key="navigationItem" title="Сканировать QR код" id="6hR-9j-eIg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4b-zQ-gmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
