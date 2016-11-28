@@ -71,7 +71,7 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITable
         //print("UPDATE: %@", beaconInfo.description)
     }
     func didObserveURLBeacon(_ beaconScanner: BeaconScanner, URL: Foundation.URL, RSSI: Int) {
-        print("URL SEEN: %@, RSSI: %d", URL, RSSI)
+        //print("URL SEEN: %@, RSSI: %d", URL, RSSI)
         
         if (URL.absoluteString.contains(URL_PATTERN)){
             
@@ -90,10 +90,15 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITable
             dataSet.insert(id!)
             dataSource.findQueueById(qid: id!, callBack: self)
         }
-
-        
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showQueueSegue"{
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let destinationVC = segue.destination as? QueueScreenController
+                destinationVC?.qid = beaconQueues[indexPath.row].qid
+            }
+        }
+    }
     
-
 }
