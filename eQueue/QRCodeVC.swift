@@ -48,7 +48,6 @@ class QRCodeVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     private func initBorderView(){
         qrCodeFrameView = UIView()
-        qrCodeFrameView?.layer.borderColor = UIColor.green.cgColor
         qrCodeFrameView?.layer.borderWidth = 2
         view.addSubview(qrCodeFrameView!)
         view.bringSubview(toFront: qrCodeFrameView!)
@@ -65,13 +64,14 @@ class QRCodeVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         if (metaDataObject.type == AVMetadataObjectTypeQRCode) {
             let barCodeObject = previewLayer?.transformedMetadataObject(for: metaDataObject as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
+            
             qrCodeFrameView?.frame = barCodeObject.bounds
             
             if (metaDataObject.stringValue != nil) {
                 if (metaDataObject.stringValue.contains(BARCODE_PATTERN)){
                     captureSession?.stopRunning()
                     let id = Int(metaDataObject.stringValue.substring(from: BARCODE_PATTERN.endIndex))
-                    
+                    qrCodeFrameView?.layer.borderColor = UIColor.green.cgColor
                     guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "QueueController") as? QueueScreenController else {
                         print("Could not instantiate view controller with identifier of type SecondViewController")
                         return
@@ -81,6 +81,8 @@ class QRCodeVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                     DispatchQueue.main.async {
                         self.navigationController?.pushViewController(vc, animated:true)
                     }
+                } else {
+                    qrCodeFrameView?.layer.borderColor = UIColor.red.cgColor
                 }
             }
         }
