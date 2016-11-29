@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Мои очереди-->
+        <!--My QueuesVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MyQueuesVC" customModule="eQueue" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RUG-dW-5P4" id="XdG-7O-tXW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="vtb-fW-UiC">
@@ -143,7 +143,19 @@
                             <constraint firstItem="djL-N0-ehD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mJ5-hd-JrD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Мои очереди" id="Qsz-HS-cRh"/>
+                    <navigationItem key="navigationItem" id="Qsz-HS-cRh">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="xSV-h9-rqx">
+                            <rect key="frame" x="89" y="7" width="197" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.21568627450980393" green="0.12549019607843137" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                            <segments>
+                                <segment title="Мои очереди"/>
+                                <segment title="История"/>
+                            </segments>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="djL-N0-ehD" id="UGw-BQ-VHm"/>
                     </connections>
@@ -353,8 +365,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ng6-b6-Rxj">
-                                <rect key="frame" x="172.5" y="328" width="30" height="30"/>
-                                <state key="normal" title="Find">
+                                <rect key="frame" x="162" y="328" width="51" height="30"/>
+                                <state key="normal" title="Искать">
                                     <color key="titleColor" red="0.16078431369999999" green="0.08235294118" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -517,7 +529,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TTl-Y7-K9G" id="Zj6-CD-eSe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="IpA-Qo-mtV">
@@ -658,7 +670,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JEm-iU-lIu" id="PfQ-XQ-BtG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="queue_icon" translatesAutoresizingMaskIntoConstraints="NO" id="o6Q-1B-V4I">
@@ -797,6 +809,6 @@
         <image name="ticket" width="252" height="253"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Z18-8v-j5t"/>
+        <segue reference="4Bd-5a-RfU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,6 +12,7 @@ import MapKit
 class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
     
     internal func onJoinResponse(response: Dictionary<String, AnyObject>) {
+        //need to handle server response and make reRequest to update queueinfo
         print(response)
     }
     
@@ -29,6 +30,7 @@ class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
     
     @IBOutlet var tiketImage: UIImageView!
     @IBOutlet var myNumberInQ: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
@@ -70,5 +72,6 @@ class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
     
     @IBAction func joinBtnTaped(_ sender: Any) {
         dataSource.joinQueue(qid: queue.qid, callBack: self)
+        joinBtn.isEnabled = false
     }
 }
