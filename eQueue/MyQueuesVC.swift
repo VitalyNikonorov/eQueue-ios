@@ -58,6 +58,7 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showQueueSegue"{
             if let indexPath = self.tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: indexPath, animated: true)
                 let destinationVC = segue.destination as? QueueScreenController
                 destinationVC?.qid = myQueues[indexPath.row].qid
             }

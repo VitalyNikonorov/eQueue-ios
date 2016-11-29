@@ -96,6 +96,7 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITable
         if segue.identifier == "showQueueSegue"{
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let destinationVC = segue.destination as? QueueScreenController
+                tableView.deselectRow(at: indexPath, animated: true)
                 destinationVC?.qid = beaconQueues[indexPath.row].qid
             }
         }
