@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		926B1D2669FE6B7791146311 /* Pods_eQueue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD1276E013EB369B32E2AA0 /* Pods_eQueue.framework */; };
 		D81669251DB4D553000D7C43 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81669241DB4D553000D7C43 /* DataSource.swift */; };
 		D82F2B341DEB76DA00362918 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F2B331DEB76DA00362918 /* TabBarController.swift */; };
 		D82F2B361DEC1EFF00362918 /* QRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F2B351DEC1EFF00362918 /* QRCodeVC.swift */; };
@@ -50,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90E4EAF2C7E851110695334E /* Pods-eQueue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eQueue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eQueue/Pods-eQueue.debug.xcconfig"; sourceTree = "<group>"; };
+		9FD1276E013EB369B32E2AA0 /* Pods_eQueue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eQueue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A186E16394D75DC4132043E1 /* Pods-eQueue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eQueue.release.xcconfig"; path = "Pods/Target Support Files/Pods-eQueue/Pods-eQueue.release.xcconfig"; sourceTree = "<group>"; };
 		D81669241DB4D553000D7C43 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		D82F2B331DEB76DA00362918 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D82F2B351DEC1EFF00362918 /* QRCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeVC.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89C1D601DC3E0B200B5AEFC /* MapKit.framework in Frameworks */,
+				926B1D2669FE6B7791146311 /* Pods_eQueue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +112,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2351F3BBB19B5ADB3C014441 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				90E4EAF2C7E851110695334E /* Pods-eQueue.debug.xcconfig */,
+				A186E16394D75DC4132043E1 /* Pods-eQueue.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D82F2B371DEC3F4500362918 /* Beacon Scanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +139,7 @@
 				D84E77891DAA7AF200DB9DE0 /* eQueueUITests */,
 				D84E77681DAA7AF200DB9DE0 /* Products */,
 				D89C1D5E1DC3E0B200B5AEFC /* Frameworks */,
+				2351F3BBB19B5ADB3C014441 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				D89C1D5F1DC3E0B200B5AEFC /* MapKit.framework */,
+				9FD1276E013EB369B32E2AA0 /* Pods_eQueue.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,9 +213,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D84E778F1DAA7AF200DB9DE0 /* Build configuration list for PBXNativeTarget "eQueue" */;
 			buildPhases = (
+				6DDBC87EDB2ADE8C382755B1 /* [CP] Check Pods Manifest.lock */,
 				D84E77631DAA7AF200DB9DE0 /* Sources */,
 				D84E77641DAA7AF200DB9DE0 /* Frameworks */,
 				D84E77651DAA7AF200DB9DE0 /* Resources */,
+				F33AB7D4DB48263764C4F5F5 /* [CP] Embed Pods Frameworks */,
+				029B378D85532925ABD433A8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -324,6 +343,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		029B378D85532925ABD433A8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eQueue/Pods-eQueue-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DDBC87EDB2ADE8C382755B1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F33AB7D4DB48263764C4F5F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eQueue/Pods-eQueue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D84E77631DAA7AF200DB9DE0 /* Sources */ = {
@@ -496,6 +563,7 @@
 		};
 		D84E77901DAA7AF200DB9DE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90E4EAF2C7E851110695334E /* Pods-eQueue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = V3J88R4YSC;
@@ -509,6 +577,7 @@
 		};
 		D84E77911DAA7AF200DB9DE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A186E16394D75DC4132043E1 /* Pods-eQueue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = V3J88R4YSC;

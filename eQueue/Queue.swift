@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class Queue {
 
@@ -32,4 +33,19 @@ class Queue {
     public private(set) var size: Int
     public private(set) var forwardMe: Int
     public private(set) var coords: String?
+}
+
+class QueueDAO: Object {
+    
+    dynamic var qid = 0
+    dynamic var name = ""
+    dynamic var descriprion = ""
+    dynamic var location = ""
+    
+    dynamic var waitingTime = 0
+    dynamic var myNumber = 0
+    dynamic var size = 0
+    dynamic var forwardMe = 0
+    dynamic var coords = ""
+
 }
