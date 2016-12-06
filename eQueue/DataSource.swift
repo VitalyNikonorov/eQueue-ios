@@ -194,7 +194,7 @@ class DataSource {
     /**
      * Function for joining to selected queue
      */
-    func joinQueue(qid: Int, callBack: JoinCallback) {
+    func joinQueue(qid: Int, callBack: NetworkRequestCallback) {
         
         concurrentRequestQueue.async{
             let post = "token=\(self.token! as String)&qid=\(qid)"
@@ -202,9 +202,15 @@ class DataSource {
             
             let task = self.networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
                 print("Response: \(response)")
+                
+                guard error == nil else {
+                    callBack.onError(error: error!)
+                    return
+                }
+                
                 do {
                     let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                    callBack.onJoinResponse(response: jsonResponse!)
+                    callBack.onSucces(response: jsonResponse!)
                 }
             })
             task.resume()

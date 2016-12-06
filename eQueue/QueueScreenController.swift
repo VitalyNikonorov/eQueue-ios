@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class QueueScreenController : UIViewController, JoinCallback, NetworkRequestCallback {
+class QueueScreenController : UIViewController, NetworkRequestCallback {
     
     internal func onJoinResponse(response: Dictionary<String, AnyObject>) {
         //need to handle server response and make reRequest to update queueinfo
@@ -43,6 +43,15 @@ class QueueScreenController : UIViewController, JoinCallback, NetworkRequestCall
             self.queue = mQueue
             DispatchQueue.main.async {
                 self.updateView()
+            }
+        }
+        
+        if let result = response as? Dictionary<String, AnyObject> {
+            
+            if (result["code"] as! Int64 == 200){
+                dataSource.findQueueById(qid: qid, callBack: self)
+            } else {
+                showAlert(message: "При запросе произошла ошибка")
             }
         }
     }

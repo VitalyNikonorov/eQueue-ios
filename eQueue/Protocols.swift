@@ -13,9 +13,9 @@ import Foundation
 //    func onError(error: Error)
 //}
 
-protocol JoinCallback {
-    func onJoinResponse(response: Dictionary<String, AnyObject>);
-}
+//protocol JoinCallback {
+//    func onJoinResponse(response: Dictionary<String, AnyObject>);
+//}
 
 protocol NetworkRequestCallback {
     func onSucces(response: Any);
