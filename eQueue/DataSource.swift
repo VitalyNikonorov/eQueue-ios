@@ -14,6 +14,10 @@ class DataSource {
     private var token: String?
     private let URL_BASE = "http://equeue.org"
     
+    public func isTokenOK() -> Bool {
+        return token != nil
+    }
+    
     /**
      * Dispatch queue for handling network request preparing in concurrent queue, 
      * but first reqest - token request if it needs works with barrier and syncronous!!!

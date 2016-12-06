@@ -48,7 +48,11 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     func updateData(){
-        dataSource.getMyQueues(callBack: self)
+        if (dataSource.isTokenOK()){
+            dataSource.getMyQueues(callBack: self)
+        } else {
+            self.refreshControl.endRefreshing()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,7 +73,6 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         DispatchQueue.main.async {
             self.myQueues = response
             self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
             self.refreshControl.endRefreshing()
         }
     }

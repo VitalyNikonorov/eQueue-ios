@@ -34,9 +34,13 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func updateData(){
-        locationManager.startUpdatingLocation()
+        if (dataSource.isTokenOK()){
+            locationManager.startUpdatingLocation()
+        } else {
+            self.refreshControl.endRefreshing()
+        }
     }
-    
+
     func onQueueListResponse(response: Array<Queue>) {
         DispatchQueue.main.async {
             self.queues = response
