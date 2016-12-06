@@ -17,10 +17,6 @@ protocol JoinCallback {
     func onJoinResponse(response: Dictionary<String, AnyObject>);
 }
 
-protocol QueueListCallback {
-    func onQueueListResponse(response: Array<Queue>);
-}
-
 protocol NetworkRequestCallback {
     func onSucces(response: Any);
     func onError(error: Error)

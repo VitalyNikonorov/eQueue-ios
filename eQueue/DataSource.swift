@@ -239,16 +239,22 @@ class DataSource {
     /**
      * Function for requesting near list of queues by location
      */
-    func getNearQueues(coords: String, callBack: QueueListCallback) {
+    func getNearQueues(coords: String, callBack: NetworkRequestCallback) {
         concurrentRequestQueue.async{
             let request = self.createRequest(url: NSURL(string: "\(self.URL_BASE)/api/queue/find_near/?coords=\(coords)") as! URL, requestMethod: HTTPRequestMethod.get, contentType: HTTPContentType.none, requestData: "")
             
             let task = self.networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
                 do {
+                    
+                    guard error == nil else {
+                        callBack.onError(error: error!)
+                        return
+                    }
+                    
                     let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     let queues = self.parseJson(anyObj: (jsonResponse!["body"] as! Dictionary<String, AnyObject>)["queues"]!)
                     
-                    callBack.onQueueListResponse(response: queues)
+                    callBack.onSucces(response: queues)
                 }
             })
             task.resume()

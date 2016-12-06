@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, QueueListCallback {
+class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, NetworkRequestCallback {
     @IBOutlet var tableView: UITableView!
     var dataSource: DataSource = DataSource.sharedInstance
     var locationManager : CLLocationManager = CLLocationManager()
@@ -41,12 +41,18 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
 
-    func onQueueListResponse(response: Array<Queue>) {
-        DispatchQueue.main.async {
-            self.queues = response
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
+    func onSucces(response: Any) {
+        if let result = response as? Array<Queue>{
+            DispatchQueue.main.async {
+                self.queues = result
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
+    }
+    
+    func onError(error: Error) {
+        showAlert(message: error.localizedDescription)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,5 +94,16 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         locationManager.stopUpdatingLocation()
         let coords = "\((locations.last?.coordinate.latitude)! as CLLocationDegrees),\((locations.last?.coordinate.longitude)! as CLLocationDegrees)"
         dataSource.getNearQueues(coords: coords, callBack: self)
+    }
+    
+    
+    private func showAlert(message: String){
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+            _ = self.navigationController?.popViewController(animated: true)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
