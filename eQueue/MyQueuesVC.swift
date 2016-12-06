@@ -69,14 +69,19 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
-    func onSucces(response: Any) {
+    func onSucces(response: Any, type: RequestType) {
         
-        if let resp = response as? Array<Queue>{
-            DispatchQueue.main.async {
-                self.myQueues = resp
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+        switch type {
+        case .queueList:
+            if let resp = response as? Array<Queue>{
+                DispatchQueue.main.async {
+                    self.myQueues = resp
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
             }
+        case .queue: break
+        case .joinQueue: break
         }
     }
 

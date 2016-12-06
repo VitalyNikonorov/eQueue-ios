@@ -41,13 +41,18 @@ class GeoSearchViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
 
-    func onSucces(response: Any) {
-        if let result = response as? Array<Queue>{
-            DispatchQueue.main.async {
-                self.queues = result
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
-            }
+    func onSucces(response: Any, type: RequestType) {
+        switch type {
+            case .queueList:
+                if let result = response as? Array<Queue>{
+                    DispatchQueue.main.async {
+                        self.queues = result
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
+                    }
+                }
+            case .joinQueue: break
+            case .queue: break
         }
     }
     

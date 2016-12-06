@@ -34,14 +34,19 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, NetworkRequestCallback
         self.beaconScanner.stopScanning()
     }
     
-    func onSucces(response: Any) {
+    func onSucces(response: Any, type: RequestType) {
         
-        if let result = response as? Queue {
-            DispatchQueue.main.async {
-                print("loaded \(result.qid)")
-                self.beaconQueues.append(result)
-                self.tableView.reloadData()
+        switch type {
+        case .queue:
+            if let result = response as? Queue {
+                DispatchQueue.main.async {
+                    print("loaded \(result.qid)")
+                    self.beaconQueues.append(result)
+                    self.tableView.reloadData()
+                }
             }
+        case .joinQueue: break
+        case .queueList: break
         }
     }
     

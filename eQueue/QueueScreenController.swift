@@ -37,21 +37,24 @@ class QueueScreenController : UIViewController, NetworkRequestCallback {
         dataSource.findQueueById(qid: qid, callBack: self)
     }
     
-    func onSucces(response: Any) {
+    func onSucces(response: Any, type: RequestType) {
         
-        if let mQueue = response as? Queue {
-            self.queue = mQueue
-            DispatchQueue.main.async {
-                self.updateView()
+        switch type {
+        case .queue:
+            if let mQueue = response as? Queue {
+                self.queue = mQueue
+                DispatchQueue.main.async {
+                    self.updateView()
+                }
             }
-        }
-        
-        if let result = response as? Dictionary<String, AnyObject> {
-            
-            if (result["code"] as! Int64 == 200){
-                dataSource.findQueueById(qid: qid, callBack: self)
-            } else {
-                showAlert(message: "При запросе произошла ошибка")
+        case .joinQueue: break
+        case .queueList:
+            if let result = response as? Dictionary<String, AnyObject> {
+                if (result["code"] as! Int64 == 200){
+                    dataSource.findQueueById(qid: qid, callBack: self)
+                } else {
+                    showAlert(message: "При запросе произошла ошибка")
+                }
             }
         }
     }

@@ -18,6 +18,14 @@ import Foundation
 //}
 
 protocol NetworkRequestCallback {
-    func onSucces(response: Any);
+    func onSucces(response: Any, type: RequestType);
     func onError(error: Error)
+}
+
+enum RequestType {
+    
+    case queue
+    case queueList
+    case joinQueue
+    
 }

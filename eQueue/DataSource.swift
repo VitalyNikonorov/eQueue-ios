@@ -102,7 +102,6 @@ class DataSource {
                     print("Response: \(response)")
                     do {
                         
-                        
                         let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                         print(jsonResponse!)
                         self.token = (jsonResponse?["body"] as! Dictionary<String, AnyObject>)["token"] as! String?
@@ -110,21 +109,15 @@ class DataSource {
                         print("servers token: \(self.token! as String)")
                         KeyChainService.saveToken(token: (self.token as String!) as NSString)
                     
-//                        print("loaded from KC token: \(KeyChainService.loadToken() as String?)")
-//                                    semaphore.signal()
-                    
                         let _: NSError?
                         _ = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? NSDictionary
                     } catch let err as NSError {
                         print(err)
-//                        semaphore.signal()
                         let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                         print("Error could not parse JSON: '\(jsonStr)'")
                     }
                 })
                 task.resume()
-
-                //semaphore.wait(timeout: DispatchTime.distantFuture)
             }
         }
     }
@@ -153,7 +146,7 @@ class DataSource {
                 
                 let q = Queue( qid: (bodyJson["qid"] as AnyObject? as? Int) ?? -1, name: (bodyJson["name"] as AnyObject? as? String) ?? "", description: (bodyJson["description"] as AnyObject? as? String) ?? "", location: (bodyJson["address"] as AnyObject? as? String) ?? "", waitingTime: (bodyJson["wait_time"] as AnyObject? as? Int) ?? 0, size: (bodyJson["number"] as AnyObject? as? Int) ?? 0, forwardMe: (bodyJson["in_front"] as AnyObject? as? Int) ?? 0, coords: (bodyJson["coords"] as AnyObject? as? String) ?? "", myNumber: (bodyJson["number"] as AnyObject? as? Int) ?? 0)
                 
-                callBack.onSucces(response: q)
+                callBack.onSucces(response: q, type: RequestType.queue)
             })
             
             task.resume()
@@ -210,7 +203,7 @@ class DataSource {
                 
                 do {
                     let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                    callBack.onSucces(response: jsonResponse!)
+                    callBack.onSucces(response: jsonResponse!, type: RequestType.joinQueue)
                 }
             })
             task.resume()
@@ -235,7 +228,7 @@ class DataSource {
                     let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     let queues = self.parseJson(anyObj: (jsonResponse!["body"] as! Dictionary<String, AnyObject>)["queues"]!)
                     
-                    callBack.onSucces(response: queues)
+                    callBack.onSucces(response: queues, type: RequestType.queueList)
                 }
             })
             task.resume()
@@ -260,7 +253,7 @@ class DataSource {
                     let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     let queues = self.parseJson(anyObj: (jsonResponse!["body"] as! Dictionary<String, AnyObject>)["queues"]!)
                     
-                    callBack.onSucces(response: queues)
+                    callBack.onSucces(response: queues, type: RequestType.queueList)
                 }
             })
             task.resume()
