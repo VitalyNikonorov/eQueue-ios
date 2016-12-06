@@ -133,6 +133,11 @@ class DataSource {
             
             let task = self.networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
                 
+                guard error == nil else {
+                    callBack.onError(error: error!)
+                    return
+                }
+                
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                 let bodyJson = jsonResponse?["body"] as! Dictionary<String, AnyObject>
                 

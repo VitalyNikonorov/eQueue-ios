@@ -44,6 +44,10 @@ class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
         }
     }
     
+    func onError(error: Error) {
+        showAlert(message: error.localizedDescription)
+    }
+    
     private func updateView(){
         qWaitingLbl.text = String(describing: queue.waitingTime)
         qSizeLbl.text = String(describing: queue.size)
@@ -73,5 +77,15 @@ class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
     @IBAction func joinBtnTaped(_ sender: Any) {
         dataSource.joinQueue(qid: queue.qid, callBack: self)
         joinBtn.isEnabled = false
+    }
+    
+    private func showAlert(message: String){
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+            _ = self.navigationController?.popViewController(animated: true)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

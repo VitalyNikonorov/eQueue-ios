@@ -42,6 +42,10 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITable
         }
     }
     
+    func onError(error: Error) {
+        showAlert(message: error.localizedDescription)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (beaconQueues.count)
     };
@@ -102,4 +106,12 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITable
         }
     }
     
+    private func showAlert(message: String){
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }

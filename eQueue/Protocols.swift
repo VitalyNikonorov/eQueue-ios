@@ -10,6 +10,7 @@ import Foundation
 
 protocol QueueCallback {
     func onQueueInfoLoaded(response: Queue);
+    func onError(error: Error)
 }
 
 protocol JoinCallback {
