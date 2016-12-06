@@ -11,11 +11,6 @@ import MapKit
 
 class QueueScreenController : UIViewController, NetworkRequestCallback {
     
-    internal func onJoinResponse(response: Dictionary<String, AnyObject>) {
-        //need to handle server response and make reRequest to update queueinfo
-        print(response)
-    }
-    
     var qid : Int!
 
     private var queue : Queue!
