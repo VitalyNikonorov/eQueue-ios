@@ -42,7 +42,7 @@ public class KeyChainService: NSObject {
     }
     
     public class func loadToken() -> NSString? {
-        return self.load(service: passwordKey as NSString)
+        return self.load(service: (passwordKey as NSString?)!)
     }
     
     /**

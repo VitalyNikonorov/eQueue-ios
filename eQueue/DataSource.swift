@@ -38,6 +38,10 @@ class DataSource {
         createUser(email: "", password: "", token: "")
     }
     
+    public func initUser(){
+        
+    }
+    
     /**
      * Method for parsing server answer with list of queues
      */
@@ -83,7 +87,7 @@ class DataSource {
      */
     func createUser(email: String?, password: String?, token: String?) {
         
-        concurrentRequestQueue.async(flags: .barrier){
+        concurrentRequestQueue.async(/*flags: .barrier*/){
 
             self.token = KeyChainService.loadToken() as String?
         
@@ -92,11 +96,13 @@ class DataSource {
                 let url = NSURL(string: "\(self.URL_BASE)/api/user/create/") as! URL
                 let request = self.createRequest(url: url, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
                 
-                let semaphore = DispatchSemaphore(value: 0)
+                //let semaphore = DispatchSemaphore(value: 0)
             
                 let task = self.networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
                     print("Response: \(response)")
                     do {
+                        
+                        
                         let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                         print(jsonResponse!)
                         self.token = (jsonResponse?["body"] as! Dictionary<String, AnyObject>)["token"] as! String?
@@ -104,21 +110,21 @@ class DataSource {
                         print("servers token: \(self.token! as String)")
                         KeyChainService.saveToken(token: (self.token as String!) as NSString)
                     
-                        print("loaded from KC token: \(KeyChainService.loadToken() as String?)")
-                                    semaphore.signal()
+//                        print("loaded from KC token: \(KeyChainService.loadToken() as String?)")
+//                                    semaphore.signal()
                     
                         let _: NSError?
                         _ = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? NSDictionary
                     } catch let err as NSError {
                         print(err)
-                        semaphore.signal()
+//                        semaphore.signal()
                         let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                         print("Error could not parse JSON: '\(jsonStr)'")
                     }
                 })
                 task.resume()
 
-                semaphore.wait(timeout: DispatchTime.distantFuture)
+                //semaphore.wait(timeout: DispatchTime.distantFuture)
             }
         }
     }
@@ -127,7 +133,7 @@ class DataSource {
     /**
      * Function for requesting queue by it id
      */
-    func findQueueById(qid: Int, callBack: QueueCallback) {
+    func findQueueById(qid: Int, callBack: NetworkRequestCallback) {
         
         concurrentRequestQueue.async{
         
@@ -147,7 +153,7 @@ class DataSource {
                 
                 let q = Queue( qid: (bodyJson["qid"] as AnyObject? as? Int) ?? -1, name: (bodyJson["name"] as AnyObject? as? String) ?? "", description: (bodyJson["description"] as AnyObject? as? String) ?? "", location: (bodyJson["address"] as AnyObject? as? String) ?? "", waitingTime: (bodyJson["wait_time"] as AnyObject? as? Int) ?? 0, size: (bodyJson["number"] as AnyObject? as? Int) ?? 0, forwardMe: (bodyJson["in_front"] as AnyObject? as? Int) ?? 0, coords: (bodyJson["coords"] as AnyObject? as? String) ?? "", myNumber: (bodyJson["number"] as AnyObject? as? Int) ?? 0)
                 
-                callBack.onQueueInfoLoaded(response: q)
+                callBack.onSucces(response: q)
             })
             
             task.resume()
@@ -208,17 +214,22 @@ class DataSource {
     /**
      * Function for requesting user's list of queues
      */
-    func getMyQueues(callBack: QueueListCallback) {
+    func getMyQueues(callBack: NetworkRequestCallback) {
         concurrentRequestQueue.async{
             let post = "token=\(self.token! as String)"
             let request = self.createRequest(url: NSURL(string: "\(self.URL_BASE)/api/queue/in-queue/") as! URL, requestMethod: HTTPRequestMethod.post, contentType: HTTPContentType.urlencoded, requestData: post)
             
             let task = self.networkSession.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
                 do {
+                    guard error == nil else {
+                        callBack.onError(error: error!)
+                        return
+                    }
+                    
                     let jsonResponse = try? JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                     let queues = self.parseJson(anyObj: (jsonResponse!["body"] as! Dictionary<String, AnyObject>)["queues"]!)
                     
-                    callBack.onQueueListResponse(response: queues)
+                    callBack.onSucces(response: queues)
                 }
             })
             task.resume()

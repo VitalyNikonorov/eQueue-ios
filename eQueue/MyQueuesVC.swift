@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, QueueListCallback {
+class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NetworkRequestCallback {
     @IBOutlet var tableView: UITableView!
     
     var dataSource: DataSource = DataSource.sharedInstance
@@ -69,13 +69,30 @@ class MyQueuesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
-    func onQueueListResponse(response: Array<Queue>) {
-        DispatchQueue.main.async {
-            self.myQueues = response
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
+    func onSucces(response: Any) {
+        
+        if let resp = response as? Array<Queue>{
+            DispatchQueue.main.async {
+                self.myQueues = resp
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
     }
 
+    func onError(error: Error) {
+        showAlert(message: error.localizedDescription)
+    }
+    
+    private func showAlert(message: String){
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+            _ = self.navigationController?.popViewController(animated: true)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 

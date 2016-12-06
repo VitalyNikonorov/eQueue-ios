@@ -8,10 +8,10 @@
 
 import Foundation
 
-protocol QueueCallback {
-    func onQueueInfoLoaded(response: Queue);
-    func onError(error: Error)
-}
+//protocol QueueCallback {
+//    func onQueueInfoLoaded(response: Queue);
+//    func onError(error: Error)
+//}
 
 protocol JoinCallback {
     func onJoinResponse(response: Dictionary<String, AnyObject>);
@@ -19,4 +19,9 @@ protocol JoinCallback {
 
 protocol QueueListCallback {
     func onQueueListResponse(response: Array<Queue>);
+}
+
+protocol NetworkRequestCallback {
+    func onSucces(response: Any);
+    func onError(error: Error)
 }

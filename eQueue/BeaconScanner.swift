@@ -77,8 +77,12 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
     /// MARK - private methods and delegate callbacks
     ///
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == CBManagerState.poweredOn && self.shouldBeScanning {
-            self.startScanningSynchronized();
+        if #available(iOS 10.0, *) {
+            if central.state == CBManagerState.poweredOn && self.shouldBeScanning {
+                self.startScanningSynchronized();
+            }
+        } else {
+            // Fallback on earlier versions
         }
     }
     
@@ -170,14 +174,18 @@ class BeaconScanner: NSObject, CBCentralManagerDelegate {
     }
     
     fileprivate func startScanningSynchronized() {
-        if self.centralManager.state != CBManagerState.poweredOn {
-            NSLog("CentralManager state is %d, cannot start scan", self.centralManager.state.rawValue)
-            self.shouldBeScanning = true
+        if #available(iOS 10.0, *) {
+            if self.centralManager.state != CBManagerState.poweredOn {
+                NSLog("CentralManager state is %d, cannot start scan", self.centralManager.state.rawValue)
+                self.shouldBeScanning = true
+            } else {
+                NSLog("Starting to scan for Eddystones")
+                let services = [CBUUID(string: "FEAA")]
+                let options = [CBCentralManagerScanOptionAllowDuplicatesKey : true]
+                self.centralManager.scanForPeripherals(withServices: services, options: options)
+            }
         } else {
-            NSLog("Starting to scan for Eddystones")
-            let services = [CBUUID(string: "FEAA")]
-            let options = [CBCentralManagerScanOptionAllowDuplicatesKey : true]
-            self.centralManager.scanForPeripherals(withServices: services, options: options)
+            // Fallback on earlier versions
         }
     }
 }

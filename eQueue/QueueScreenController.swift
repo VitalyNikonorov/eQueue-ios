@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
+class QueueScreenController : UIViewController, JoinCallback, NetworkRequestCallback {
     
     internal func onJoinResponse(response: Dictionary<String, AnyObject>) {
         //need to handle server response and make reRequest to update queueinfo
@@ -37,10 +37,13 @@ class QueueScreenController : UIViewController, JoinCallback, QueueCallback {
         dataSource.findQueueById(qid: qid, callBack: self)
     }
     
-    func onQueueInfoLoaded(response: Queue) {
-        self.queue = response
-        DispatchQueue.main.async {
-            self.updateView()
+    func onSucces(response: Any) {
+        
+        if let mQueue = response as? Queue {
+            self.queue = mQueue
+            DispatchQueue.main.async {
+                self.updateView()
+            }
         }
     }
     

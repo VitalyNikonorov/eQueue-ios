@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITableViewDataSource, UITableViewDelegate {
+class BeaconsVC: UIViewController, BeaconScannerDelegate, NetworkRequestCallback, UITableViewDataSource, UITableViewDelegate {
     
 
     var beaconScanner: BeaconScanner!
@@ -34,11 +34,14 @@ class BeaconsVC: UIViewController, BeaconScannerDelegate, QueueCallback, UITable
         self.beaconScanner.stopScanning()
     }
     
-    func onQueueInfoLoaded(response: Queue) {
-        DispatchQueue.main.async {
-            print("loaded \(response.qid)")
-            self.beaconQueues.append(response)
-            self.tableView.reloadData()
+    func onSucces(response: Any) {
+        
+        if let result = response as? Queue {
+            DispatchQueue.main.async {
+                print("loaded \(result.qid)")
+                self.beaconQueues.append(result)
+                self.tableView.reloadData()
+            }
         }
     }
     
